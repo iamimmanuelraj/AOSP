@@ -36,6 +36,8 @@
 # MISC
 - This build is using a custom WCSF (West Coast Super Fast) Kernel which can be found [HERE](https://github.com/iamimmanuelraj/kernel_xiaomi_jasmine_sprout)
 - [Install Instructions](https://blog.immanuelraj.me/2021/09/06/flashinginjasmine/)
+- [GCAM](https://t.me/harsh_gcam)
+- This rom uses OLD CAM kernel
 
 # My Stuff : - 
 >-XDA :- [Immanuel Raj](https://forum.xda-developers.com/m/immanuel-raj.9376270/)
