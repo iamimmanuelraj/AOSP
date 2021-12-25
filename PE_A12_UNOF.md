@@ -38,6 +38,7 @@
 - [Install Instructions](https://blog.immanuelraj.me/2021/09/06/flashinginjasmine/)
 - [GCAM](https://t.me/harsh_gcam)
 - This rom uses OLD CAM kernel
+- If you face volt issues when using dual sim root your device then go to system/system_ext/app/datastatusnotification/ and delete datastatusnotification.apk and reboot phone
 
 # My Stuff : - 
 >-XDA :- [Immanuel Raj](https://forum.xda-developers.com/m/immanuel-raj.9376270/)
