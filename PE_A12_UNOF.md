@@ -1,3 +1,42 @@
+# Next Release -- NO ETA
+
+## IMPORTANT
+- ENCRYPTED
+- USER BUILD
+- CLEAN FLASH RECOMENDED
+- MUST USE PE RECOVERY ONLY (EXCEPT FOR INITIAL FLASH AND DONT CHANGE TO ANY OTHER CUSTOM RECOVERY)
+- DO NOT CHANGE KERNEL (ELSE ROM WILL NOT WORK)
+
+## REST FIXES
+- Enabled Default USB audio configs
+- Updated DRM clearkey module to v1.4 [Latest]
+- Follow CAF for media profiles and media codes
+- Added some missing bluetooth props and removed some old ones as well
+- Add new symlinks for newer (A12) RIL blobs [THis is not fully implemented as i am testing this]
+- Removed so many RIL related log spams
+- Clean Up Network Selection [Now only shows 2/3/4G instead of EDGE/GLobal etc]
+- Switched Back to Combined Signal icon 
+- Switched back to source built Perf Hal
+- Updated Perf configs from S62Pro
+- Removed a couple of old/un-necessary packages
+- Fixed a small issue in Audio package
+- Switched to newer BootCtrl 1.2 Hal
+- Fixed some camera props
+- FIxed CDSP Working [All CDSP related stuff should work better now]
+- Imported CDSP stack from S62Pro
+- Updated Scripts from latest SDM660 CAF tag
+- Imported PowerManager Blobs from S62Pro
+- Updated Perf Stack from S62Pro and added some dependencies as well
+- Fixes for banking apps detecting magisk/root/customrom
+- Updated Radio Hal to the latest and greates availabel as per [THIS](https://www.eff.org/deeplinks/2022/01/victory-google-releases-disable-2g-feature-new-android-smartphones#:~:text=If%20you%20have%20an%20older%20Android%20phone%2C%20these%20steps%20may%20or%20may%20not%20work.%20Unfortunately%20due%20to%20limitations%20of%20old%20hardware%2C%20Google%20was%20only%20able%20to%20implement%20this%20feature%20on%20phones%20running%20Android%2012%20and%20supporting%20version%201.6%20of%20the%20radio%20HAL%2C%20so%20far%20this%20is%20limited%20to%20the%20Pixel%206)
+- Switched to OSS [Open SOurce Software] camera [THis is different from OLD cam and NEW cam . THis is the better and latest version of camera that is built from the AOSP source code itself]
+- Switched to A11 Graphhic Drivers
+- Switched to A12 Display HAL
+- Fixed Speech service by google crashin in first boot
+- ANNNNDDDDD MMMANNNNNYYYY MMMOOOORRREEEEE coomming sooooooooooooooooon.......
+
+
+
 # 25.12.2021
 
 ## IMPORTANT
