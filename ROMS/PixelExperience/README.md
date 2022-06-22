@@ -4,11 +4,11 @@
 
 > This is a bit custom source code that is maintained especially for MiA2 and Mi6X.
 
-- [PixelExperience ROM Changelogs]()
+- [PixelExperience ROM Changelogs](https://github.com/iamimmanuelraj/AOSP/blob/main/CHANGELOGS/PixelExperience.md)
 
 - [PixelExperience ROM Download](https://sourceforge.net/projects/immanuelsbuilds/files/Pixel-Experience/)
 
-- [PixelExperience ROM Alternative Download]()
+- [PixelExperience ROM Alternative Download](https://github.com/iamimmanuelraj/AOSP/releases)
 
 ### Support
 
@@ -19,6 +19,12 @@
 ### Donate
 
 - [Github Sponsor](https://github.com/sponsors/iamimmanuelraj/)
+
+- UPI 
+    - iamimmanuelraj@okaxis
+    - iamimmanuelraj@okhdfcbank
+    - iamimmanuelraj@okicici
+    - iamimmanuelraj@oksbi
 
 - PayPal (soon)
 
