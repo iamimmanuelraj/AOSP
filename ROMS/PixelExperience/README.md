@@ -9,20 +9,23 @@
 - [PixelExperience ROM Alternative Download](https://github.com/iamimmanuelraj/AOSP/releases)
 
 ### Support
+
 - [PixelExperience ROM XDA](https://forum.xda-developers.com/t/rom-12-xiaomi-mi-a2-pixelexperience-aosp-22-02-2022.4406351/)
 - [PixelExperience ROM Telegram Suppport Group](https://t.me/yaa2g)
 
 ### Donate
+
 - [Github Sponsor](https://github.com/sponsors/iamimmanuelraj/)
-- UPI 
-    - iamimmanuelraj@okaxis
-    - iamimmanuelraj@okhdfcbank
-    - iamimmanuelraj@okicici
-    - iamimmanuelraj@oksbi
+- UPI
+  - iamimmanuelraj@okaxis
+  - iamimmanuelraj@okhdfcbank
+  - iamimmanuelraj@okicici
+  - iamimmanuelraj@oksbi
 - PayPal (soon)
 - Patreon (soon)
 
 # Social
+
 - [Github](https://github.com/iamimmanuelraj)
 - [Twitter](https://twitter.com/iamimmanuelraj)
 - [XDA](https://forum.xda-developers.com/m/immanuel-raj.9376270/)

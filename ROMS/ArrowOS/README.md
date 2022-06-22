@@ -13,15 +13,16 @@
 ### Donate
 
 - [Github Sponsor](https://github.com/sponsors/iamimmanuelraj/)
-- UPI 
-    - iamimmanuelraj@okaxis
-    - iamimmanuelraj@okhdfcbank
-    - iamimmanuelraj@okicici
-    - iamimmanuelraj@oksbi
+- UPI
+  - iamimmanuelraj@okaxis
+  - iamimmanuelraj@okhdfcbank
+  - iamimmanuelraj@okicici
+  - iamimmanuelraj@oksbi
 - PayPal (soon)
 - Patreon (soon)
 
 # Social
+
 - [Github](https://github.com/iamimmanuelraj)
 - [Twitter](https://twitter.com/iamimmanuelraj)
 - [XDA](https://forum.xda-developers.com/m/immanuel-raj.9376270/)
