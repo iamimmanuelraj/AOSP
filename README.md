@@ -4,9 +4,9 @@
 
 ### Roms
 
-    # PixelExperience (https://github.com/PixelExperience)
-    # PixelExtended (https://github.com/PixelExtended)
-    # ArrowOS (https://github.com/ArrowOS)
+- [PixelExperience](https://github.com/PixelExperience)
+- [PixelExtended](https://github.com/PixelExtended)
+- [ArrowOS](https://github.com/ArrowOS)
 
 ### Devices
 
@@ -30,6 +30,6 @@ The following is a list of all the devices i have and the roms i maintain for th
 
 # Downloads and Changelogs
 
-    # PixelExperience
-    # PixelExtended
-    # ArrowOS
+- [PixelExperience]()
+- [PixelExtended]()
+- [ArrowOS]()
