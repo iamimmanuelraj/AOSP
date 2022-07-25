@@ -1,3 +1,72 @@
+# 25.07.2022
+
+## IMPORTANT
+
+- ENCRYPTED
+- USER BUILD
+- CLEAN FLASH RECOMENDED
+- MUST USE PE RECOVERY ONLY (EXCEPT FOR INITIAL FLASH AND DONT FLASH ANY OTHER CUSTOM RECOVERY JUST BOOT RECOVERY IF U WANT)
+- IF YOU WANT TO CHANGE KERNEL USE KERNEL THAT HAS OSS CAM SUPPORT AND QTI HAPTICS SUPPORT
+
+## REST FIXES
+
+- Add write permission to GMS
+- Added offline LED charging indicator
+- Removed PPR
+- Switch to AIDL Memtrack HAL
+- Switched to AIDL Ligh HAL
+- Updates the stock blobs to latest stock version [v11.28]
+- Added media props for better media support from S62Pro device
+- Added aux cam support
+- Updates idc/keylayout from stock
+- Update power profile to reflect actual battery capacity
+- Fixed many audio issues
+- Earpiece audio is louder than ever
+- DAC and normal USB - C headphone now work properly
+- OTG now works properly
+- Updated some audio related configs and drivers
+- Removed APEX
+- Fixed power button position when unlock animation is being played
+- Fixed many graphic driver problem and log spam as well
+- Added zram and zram writeback
+- Added and optimised LMK
+- Added some CPU configs and tuned some for optimal performance
+- Made sql to be in performance mode always
+- Added API26 Task profile for better sched tune boost
+- Compiled the whole systemui for better optimizaton and performance
+- Removed GFX acceleration
+- Fixed data when switching data from sim 1 to sim 2
+- Removed useless blobs
+- Compressed ramdisk for better unpacking and small size
+- Added and implementd 1.1 of bootctrl hal
+- Removed all RRO [Everthing mostly is only prebuilt overlay]
+- And some mics stuff
+
+# Credits
+
+- A huge thanks to @odsazib @stylogey for their work on OSS CAM
+- Thanks to @clarencelol for that awesome kernel
+- Thanks to the people who tested this
+- Thanks to supporters for supporting and waiting patiently for 5 months for this update
+
+# MISC
+
+- This build is using a custom kernel which can be found [HERE](https://github.com/iamimmanuelraj/android_kernel_xiaomi_jasmine_sprout)
+- [Install Instructions](https://telegra.ph/FBE-and-its-FAQs-06-25#:~:text=How%20to%20Flash%20an%20FBE%20ROM%3F)
+- [GCAM](https://t.me/harsh_gcam)
+- This rom uses OSS CAM kernel
+- [Recomended Twrp](https://sourceforge.net/projects/immanuelsbuilds/files/TWRP/)
+- [Download](https://sourceforge.net/projects/immanuelsbuilds/files/Pixel-Experience/PixelExperience_jasmine_sprout-12.1-20220725-1616-UNOFFICIAL.zip/download)
+- Report [HERE](https://t.me/yaa2g) By tagging me (@iamimmanuelraj) with proper logs and steps to reproduce
+
+# My Stuff : -
+
+> -XDA :- [Immanuel Raj](https://forum.xda-developers.com/m/immanuel-raj.9376270/)
+
+> -UPI :- iamimmanuelraj@ok[icici][axis][hdfcbank][sbi]
+
+> -Telegram - [iamimmanueraj](https://t.me/iamimmanuelraj)
+
 # 22.02.2022
 
 ## IMPORTANT
