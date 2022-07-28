@@ -24,7 +24,7 @@ Before you start using my stuff please read the standing instructions from [HERE
 
 # Downloads and Changelogs
 
-- [PixelExtended](https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS/PixelExtended)
+- [PixelExperience](https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS/PixelExperience)
 - [ArrowOS](https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS/ArrowOS)
 - [TWRP](https://sourceforge.net/projects/immanuelsbuilds/files/TWRP/)
 - [Gboard Themer](https://iamimmanuelraj.github.io/Gboardthemer/)
