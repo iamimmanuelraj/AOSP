@@ -24,7 +24,6 @@ Before you start using my stuff please read the standing instructions from [HERE
 
 # Downloads and Changelogs
 
-- [PixelExperience](https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS/PixelExperience)
 - [PixelExtended](https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS/PixelExtended)
 - [ArrowOS](https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS/ArrowOS)
 - [TWRP](https://sourceforge.net/projects/immanuelsbuilds/files/TWRP/)
