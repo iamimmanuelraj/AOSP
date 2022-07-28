@@ -6,9 +6,6 @@
 
     # PixelExperience - jasmine_sprout [UNOFFICIAL]
     # PixelExperience - wayne (soon) [UNOFFICIAL]
-    # PixelExtended - jasmine_sprout [OFFICIAL]
-    # PixelExtended - wayne (soon) [OFFICIAL]
-    # PixelExtended - whyred [OFFICIAL]
     # ArrowOS - jasmine_sprout [OFFICIAL]
     # ArrowOS - wayne (soon) [OFFICIAL]
 
