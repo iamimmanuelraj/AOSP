@@ -15,6 +15,7 @@
 - Dont flash DFE (Use encrypted rom itself)
 - Dont change the default kernel in the rom (If you decide to change, then use a kernel that supports OSS Camera and QTI haptics)
 - Use ADB SIDELOAD to install updates
+- All my builds are using OSS camera and OSS vendor and 4.19 kernel only
 
 # Kernel
 
