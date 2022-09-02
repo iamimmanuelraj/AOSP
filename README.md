@@ -4,14 +4,10 @@
 
 ### Roms and devices
 
-    # PixelExperience - jasmine_sprout [UNOFFICIAL]
-    # PixelExperience - wayne (soon) [UNOFFICIAL]
+    # PixelExperience - jasmine_sprout [OFFICIAL]
     # ArrowOS - jasmine_sprout [OFFICIAL]
-    # ArrowOS - wayne (soon) [OFFICIAL]
 
 The following is a list of all the devices i have and the roms i maintain for them.
-
-> soon can be anytime sooner or later...i can't not gaurentee the date or the status. It all depends on my time as i do it in my free time and since my laptop takes lot of time to build i will need so much more time to build the roms test and release them.
 
 ### Recovery and mods
 
@@ -24,7 +20,8 @@ Before you start using my stuff please read the standing instructions from [HERE
 
 # Downloads and Changelogs
 
-- [PixelExperience](https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS/PixelExperience)
+- [PixelExperience OFFICIAL](https://download.pixelexperience.org/jasmine_sprout)
+- [PixelExperience UNOFFICIAL-OLD BUILDS](https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS/PixelExperience)
 - [ArrowOS](https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS/ArrowOS)
 - [TWRP](https://sourceforge.net/projects/immanuelsbuilds/files/TWRP/)
 - [Gboard Themer](https://iamimmanuelraj.github.io/Gboardthemer/)
@@ -37,8 +34,6 @@ Before you start using my stuff please read the standing instructions from [HERE
   - iamimmanuelraj@okhdfcbank
   - iamimmanuelraj@okicici
   - iamimmanuelraj@oksbi
-- PayPal (soon)
-- Patreon (soon)
 
 # Social
 
