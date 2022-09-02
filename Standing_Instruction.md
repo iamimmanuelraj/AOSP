@@ -5,7 +5,7 @@
 # Roms
 
 - All my roms for all my devices are FBE V2 encrypted (With emmc optimised encryption)
-- All my roms for all my devices are shipped with user build (Except for initial days when a new version of android/rom is released)
+- All my roms for all my devices are shipped with user/userdebug build (Except for initial days when a new version of android/rom is released)
 - All my roms for all my devices are having enforcing selinux (Except for initial days when a new version of android/rom is released)
 - All my roms for all my devices are not having any neverallow (Except for initial days when a new version of android/rom is released)
 - All my roms for all my devices are passing cts
@@ -14,7 +14,7 @@
 - You can use mods or hacks at your own risk i will not support it
 - Dont flash DFE (Use encrypted rom itself)
 - Dont change the default kernel in the rom (If you decide to change, then use a kernel that supports OSS Camera and QTI haptics)
-- Use ADB SIDELOAD to install updates
+- Use ADB SIDELOAD to install updates or temporarily boot a twrp with fastboot
 - All my builds are using OSS camera and OSS vendor and 4.19 kernel only
 
 # Kernel
