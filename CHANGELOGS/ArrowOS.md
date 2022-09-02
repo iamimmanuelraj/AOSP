@@ -14,10 +14,9 @@
 
 ## REST FIXES
 
-- Fixed media and media playback issues
-- Fixed audio and call issues
-- Fixed stutters
-- And some mics stuff
+- Updated audio hal to v7
+- Updated RIL blobs from S62Pro
+- Switch to AOSP Bluetooth
 
 # Credits
 
