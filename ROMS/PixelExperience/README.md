@@ -23,7 +23,8 @@
 
 ## Support
 
-- [PixelExperience ROM XDA](https://forum.xda-developers.com/t/rom-12-xiaomi-mi-a2-pixelexperience-aosp-22-02-2022.4406351/)
+- [PixelExperience ROM XDA A12](https://forum.xda-developers.com/t/rom-12-xiaomi-mi-a2-pixelexperience-aosp-22-02-2022.4406351/)
+- [PixelExperience ROM XDA A13](https://xdaforums.com/t/rom-13-mi-a2-pixelexperience-aosp.4522151/)
 - [PixelExperience ROM Telegram OFFICIAL Support Group](https://t.me/pixelexperiencechat)
 - [My Personal Support Group](https://t.me/immanuelsfoundation)
 
