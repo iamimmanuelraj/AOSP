@@ -1,43 +1,67 @@
 # AOSP
 
-##### This repositiry is for all my AOSP and AOSP based stuff's.
+**Repository for AOSP and AOSP-based projects.**
 
-### Roms and devices
+## Roms and Devices
 
-    # PixelExperience - jasmine_sprout [OFFICIAL]
-    # ArrowOS - jasmine_sprout [OFFICIAL]
+- **PixelExperience - jasmine_sprout [OFFICIAL]**
+- **ArrowOS - jasmine_sprout [OFFICIAL]**
+- **PixelExtended - jasmine_sprout [OFFICIAL]**
 
-The following is a list of all the devices i have and the roms i maintain for them.
+This is the list of devices I maintain and the ROMs available for them.
 
-### Recovery and mods
+## Recovery and Mods
 
-    # TWRP - jasmine_sprout
-    # Gboard Themer - All Devices [OWN PROJECT]
+- **TWRP - jasmine_sprout**
+- **Gboard Themer - All Devices** [OWN PROJECT][Inactive Now]
 
 # Standing Instructions
 
-Before you start using my stuff please read the standing instructions from [HERE](https://github.com/iamimmanuelraj/AOSP/tree/main/Standing_Instruction.md)
+Before you begin using my projects, please read the [Standing Instructions](https://github.com/iamimmanuelraj/AOSP/tree/main/Standing_Instruction.md).
 
-# Downloads and Changelogs
+# Downloads
 
-- [PixelExperience OFFICIAL](https://download.pixelexperience.org/jasmine_sprout)
-- [PixelExperience UNOFFICIAL-OLD BUILDS](https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS/PixelExperience)
-- [ArrowOS](https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS/ArrowOS)
-- [TWRP](https://sourceforge.net/projects/immanuelsbuilds/files/TWRP/)
+**Official Builds:**
+
+- [PixelExperience OFFICIAL - MI A2](https://download.pixelexperience.org/jasmine_sprout)
+- [PixelExtended OFFICIAL - MI A2](https://sourceforge.net/projects/pixelextended/files/jasmine_sprout)
+- [Legion OS OFFICIAL - MI A2](https://sourceforge.net/projects/legionrom/files/jasmine_sprout)
+- [ArrowOS OFFICIAL - MI A2](https://arrowos.net/download)
+
+**Unofficial Builds:**
+
+- [PixelExperience UNOFFICIAL-OLD BUILDS - MI A2](https://sourceforge.net/projects/immanuelsbuilds/files/Pixel-Experience/)
+- [Freaky OS UNOFFICIAL - MI A2](https://sourceforge.net/projects/teamneon-ports/files/Test-Builds/freaky/)
+- [TWRP UNOFFICIAL - MI A2](https://sourceforge.net/projects/immanuelsbuilds/files/TWRP/)
+
+**Alternate Sources:**
+
+- [PixelExperience UNOFFICIAL-OLD BUILDS - MI A2](https://sourceforge.net/projects/pixelexperienceunofficial-mia2/)
+- [PixelExperience UNOFFICIAL-OLD BUILDS - MI A2](https://sourceforge.net/projects/teamneon-ports/files/Pixel-Experience/)
+- [PixelExperience UNOFFICIAL-OLD BUILDS - MI A2](https://www.pling.com/p/1671391)
+- [PixelExperience UNOFFICIAL-OLD BUILDS - MI A2](https://androidfilehost.com/?w=files&flid=315505)
+- [Pixel Extended OFFICIAL - MI A2 and Redmi Note 5 Pro](https://www.pling.com/p/1655281)
+- [TWRP UNOFFICIAL - MI A2](https://www.pling.com/p/1671453)
+- [Gboard Themer - ALL DEVICE](https://iamimmanuelraj.github.io/Gboardthemer/)
+
+*Note: Some other ROMs like EVOX and AEX that I've built may not have links. If you find them, please let me know, and I'll add them here.*
+
+# Changelog
+
+- [PixelExperience OFFICIAL AND UNOFFICIAL - MI A2](https://github.com/iamimmanuelraj/AOSP/blob/main/ROMS/PixelExperience/README.md)
+- [ArrowOS](https://github.com/iamimmanuelraj/AOSP/blob/main/ROMS/ArrowOS/README.md)
+- [PixelExtended OFFICIAL AND UNOFFICIAL - MI A2](https://github.com/iamimmanuelraj/AOSP/blob/main/ROMS/PixelExtended/README.md)
 - [Gboard Themer](https://iamimmanuelraj.github.io/Gboardthemer/)
 
 # Donate
 
-- [Github Sponsor](https://github.com/sponsors/iamimmanuelraj/)
-- UPI
-  - iamimmanuelraj@okaxis
-  - iamimmanuelraj@okhdfcbank
-  - iamimmanuelraj@okicici
-  - iamimmanuelraj@oksbi
+- [GitHub Sponsor](https://github.com/sponsors/iamimmanuelraj/)
+- UPI: iamimmanuelraj@pingpay
+- [PayPal](https://paypal.me/iamimmanuelraj?country.x=IN&locale.x=en_GB)
 
 # Social
 
-- [Github](https://github.com/iamimmanuelraj)
+- [GitHub](https://github.com/iamimmanuelraj)
 - [Twitter](https://twitter.com/iamimmanuelraj)
 - [XDA](https://forum.xda-developers.com/m/immanuel-raj.9376270/)
 - [Telegram](https://t.me/iamimmanuelraj)
