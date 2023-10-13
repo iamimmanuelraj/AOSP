@@ -1,26 +1,29 @@
-# Standing Instructions
+## Comprehensive Guidelines and Information
 
-> Before you start using my stuff please read all these standing instructions
+**Standing Instructions**
 
-# Roms
+Before you delve into utilizing my software, please take a moment to familiarize yourself with these standing instructions. I want to emphasize that I bear no responsibility for any damage to your phone or offer support for instances of carelessness or actions not explicitly outlined here.
 
-- All my roms for all my devices are FBE V2 encrypted (With emmc optimised encryption)
-- All my roms for all my devices are shipped with user/userdebug build (Except for initial days when a new version of android/rom is released)
-- All my roms for all my devices are having enforcing selinux (Except for initial days when a new version of android/rom is released)
-- All my roms for all my devices are not having any neverallow (Except for initial days when a new version of android/rom is released)
-- All my roms for all my devices are passing cts
-- All my roms for all my devices shows certified in google play store
-- I dont encourage you to use any mods or hacks (Magisk/custom zips)
-- You can use mods or hacks at your own risk i will not support it
-- Dont flash DFE (Use encrypted rom itself)
-- Dont change the default kernel in the rom (If you decide to change, then use a kernel that supports OSS Camera and QTI haptics)
-- Use ADB SIDELOAD to install updates or temporarily boot a twrp with fastboot
-- All my builds are using OSS camera and OSS vendor and 4.19 kernel only
+**Roms**
 
-# Kernel
+When it comes to my custom ROMs, I've incorporated several important features and qualities to enhance your user experience. Here's an overview of what you can expect:
 
-- All my roms and recoveries uses kernel from [HERE](https://github.com/iamimmanuelraj/android_kernel_xiaomi_jasmine_sprout)
+- **FBE V2 Encryption:** All ROMs for my devices feature FBE V2 encryption, optimized for eMMC.
+- **Build Type:** I typically provide user/userdebug builds, with the exception of the initial days following a new Android/ROM release.
+- **SELinux Enforcement:** My ROMs come with SELinux enforcement by default, providing enhanced security (except for the initial release days).
+- **Neverallow:** You'll find that my ROMs do not include any "neverallow" restrictions (with the exception of the initial release days).
+- **CTS Compatibility:** All my ROMs pass Compatibility Test Suite (CTS) by default. In case Google alters server-side settings, be patient for a fix.
+- **Google Play Store Certification:** You'll be pleased to know that all my ROMs are certified in the Google Play Store.
+- **Modifications and Hacks:** While I don't actively encourage the use of modifications or hacks, you're free to employ them at your own risk. Please note that I won't provide support for such alterations.
+- **DFE and Kernel:** Avoid flashing DFE separately, and refrain from changing the default kernel in the ROM. If you do decide to change it, make sure to choose a kernel that supports OSS Camera, QTI haptics, QTI PERF, and Aidl vibrator-based light HAL.
+- **Updates:** For installing updates, use ADB SIDELOAD with the provided recovery that is inbuilt.
+- **Kernel Details:** The kernels used in all my ROMs and recoveries can be found at [this GitHub repository](https://github.com/Atom-X-Devs/android_kernel_xiaomi_scarlet).
 
-# Recovery
+**Recovery**
 
-- As of now my custom recovery works for flashing but cant derypt alone. Will fix it in future hopefully
+Regarding the custom recovery, please be aware of its current capabilities:
+
+- **Flashing Functionality:** As of now, my custom recovery is fully functional for flashing purposes.
+- **Decryption Issue:** However, it is not equipped to decrypt data independently. I am actively working on resolving this issue in the future, so stay tuned for updates.
+
+By adhering to these guidelines and taking advantage of the features and safeguards integrated into my ROMs, you can ensure a smoother and more secure Android experience.
