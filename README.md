@@ -53,6 +53,8 @@ Before you begin using my projects, please read the [Standing Instructions](http
 - [PixelExtended OFFICIAL AND UNOFFICIAL - MI A2](https://github.com/iamimmanuelraj/AOSP/blob/main/ROMS/PixelExtended/README.md)
 - [Gboard Themer](https://iamimmanuelraj.github.io/Gboardthemer/)
 
+*Note: Ive tried to remember and add all the changelogs. Very old builds will not have changelogs and i may have not released build in between or would have not logged so it may not exist.*
+
 # Donate
 
 - [GitHub Sponsor](https://github.com/sponsors/iamimmanuelraj/)
