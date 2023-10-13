@@ -8,7 +8,7 @@
 - **ArrowOS - jasmine_sprout [OFFICIAL]**
 - **PixelExtended - jasmine_sprout [OFFICIAL]**
 
-This is the list of devices I maintain and the ROMs available for them.
+This is the list of devices I currently maintain and the ROMs available for them.
 
 ## Recovery and Mods
 
@@ -49,7 +49,7 @@ Before you begin using my projects, please read the [Standing Instructions](http
 # Changelog
 
 - [PixelExperience OFFICIAL AND UNOFFICIAL - MI A2](https://github.com/iamimmanuelraj/AOSP/blob/main/ROMS/PixelExperience/README.md)
-- [ArrowOS](https://github.com/iamimmanuelraj/AOSP/blob/main/ROMS/ArrowOS/README.md)
+- [ArrowOS OFFICIAL](https://github.com/iamimmanuelraj/AOSP/blob/main/ROMS/ArrowOS/README.md)
 - [PixelExtended OFFICIAL AND UNOFFICIAL - MI A2](https://github.com/iamimmanuelraj/AOSP/blob/main/ROMS/PixelExtended/README.md)
 - [Gboard Themer](https://iamimmanuelraj.github.io/Gboardthemer/)
 
