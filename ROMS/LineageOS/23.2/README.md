@@ -6,7 +6,7 @@
 
 > Needs an unlocked bootloader. Changelog: [CHANGELOGS/LineageOS.md](../../../CHANGELOGS/LineageOS.md).
 >
-> Known issues: Widevine is Level 3 only; only the Goodix fingerprint sensor is supported; no "Hey Google" with the screen off; no thumbnails for 10-bit SDR HEVC videos; Vi (Vodafone Idea) India users may need to pick the "Vodafone IN (www)" APN.
+> Known issues: Widevine is Level 3 only; only the Goodix fingerprint sensor is supported for now. Have a unit with an FPC sensor? Request it in the [Telegram group](https://t.me/immanuelsfoundation) and I'll add support.
 >
 > **Coming from the 09.10.2026 build or another ROM: clean install (format data).** This build is signed with different keys.
 
@@ -69,4 +69,3 @@ Mi A2 uses **retrofit dynamic partitions**, so the install follows the same proc
 
 The first boot takes a few minutes. If it drops back to the bootloader or recovery, redo the steps above.
 
-> These steps follow PixelExperience's retrofit-dynamic-partition procedure. The ROM was developed by sideloading to the second slot of a device that already ran another OS; the clean-install path above has not been run end to end on a fresh device yet.

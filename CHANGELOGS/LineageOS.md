@@ -19,7 +19,7 @@
 - Removed features the phone does not have (barometer, unused HALs)
 - SELinux and log cleanup (denials, log spam, CPU boost errors)
 
-Known issues: Widevine L3 only; only the Goodix fingerprint sensor is supported; no "Hey Google" with the screen off; no thumbnails for 10-bit SDR HEVC videos; Vi (Vodafone Idea) India users may need to pick the "Vodafone IN (www)" APN.
+Known issues: Widevine L3 only; only the Goodix fingerprint sensor is supported for now. FPC-sensor units: request support in the [Telegram group](https://t.me/immanuelsfoundation).
 
 ## LineageOS 23.2 (Android 16) - 09.10.2026
 
