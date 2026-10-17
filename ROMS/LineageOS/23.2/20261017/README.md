@@ -14,7 +14,7 @@
 
 | | |
 | --- | --- |
-| Android / ROM | Android 16, LineageOS 23.2 (no Google apps included) |
+| Android / ROM | Android 16, LineageOS 23.2 - **Vanilla** (no Google apps) or **GApps** (MindTheGapps built in; not Play Store certified) |
 | Build type | **user** build, **release-keys** signed |
 | SELinux | **Enforcing** |
 | Verified boot | **dm-verity** (AVB 2.0 hashtree on all dynamic partitions, signed vbmeta); bootloader stays unlocked |
@@ -30,11 +30,12 @@
 
 | File | Use |
 | --- | --- |
-| [lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout.zip](https://github.com/iamimmanuelraj/AOSP/releases/download/lineageos-23.2-jasmine_sprout-20261017/lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout.zip) | The ROM (sideload from recovery) |
+| [lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout.zip](https://github.com/iamimmanuelraj/AOSP/releases/download/lineageos-23.2-jasmine_sprout-20261017/lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout.zip) | The ROM, **Vanilla** - no Google apps (sideload from recovery) |
+| [lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout-GAPPS.zip](https://github.com/iamimmanuelraj/AOSP/releases/download/lineageos-23.2-jasmine_sprout-20261017/lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout-GAPPS.zip) | The ROM, **GApps** - MindTheGapps built in (sideload from recovery). Flashable GApps zips don't work on this ROM (EROFS + dm-verity), so pick this one if you want Google apps |
 | [recovery-lineage-23.2-20261017-jasmine_sprout.img](https://github.com/iamimmanuelraj/AOSP/releases/download/lineageos-23.2-jasmine_sprout-20261017/recovery-lineage-23.2-20261017-jasmine_sprout.img) | Recovery image (this device uses recovery-as-boot, so it is flashed to `boot`) |
 | [super_empty-lineage-23.2-jasmine_sprout.img](https://github.com/iamimmanuelraj/AOSP/releases/download/lineageos-23.2-jasmine_sprout-20261017/super_empty-lineage-23.2-jasmine_sprout.img) | Empty super image for the retrofit dynamic partitions (first install only) |
-| [SHA256SUMS](https://github.com/iamimmanuelraj/AOSP/releases/download/lineageos-23.2-jasmine_sprout-20261017/SHA256SUMS) | Checksums for the three files above |
-| [lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout.zip.sha256](https://github.com/iamimmanuelraj/AOSP/releases/download/lineageos-23.2-jasmine_sprout-20261017/lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout.zip.sha256) | Checksum of the ROM zip only |
+| [SHA256SUMS](https://github.com/iamimmanuelraj/AOSP/releases/download/lineageos-23.2-jasmine_sprout-20261017/SHA256SUMS) | Checksums for all files above |
+| [lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout.zip.sha256](https://github.com/iamimmanuelraj/AOSP/releases/download/lineageos-23.2-jasmine_sprout-20261017/lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout.zip.sha256), [lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout-GAPPS.zip.sha256](https://github.com/iamimmanuelraj/AOSP/releases/download/lineageos-23.2-jasmine_sprout-20261017/lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout-GAPPS.zip.sha256) | Checksum of each ROM zip |
 | [copy-partitions-20210323_1922.zip](https://github.com/PixelExperience-Devices/blobs/raw/main/copy-partitions-20210323_1922.zip) | Makes the firmware partitions consistent (once per device, from PixelExperience-Devices/blobs) |
 
 Verify your downloads (all files in one folder): `sha256sum -c SHA256SUMS`
@@ -78,7 +79,7 @@ Mi A2 uses **retrofit dynamic partitions**, so the install follows the same proc
 
 1. In recovery choose **Factory reset > Format data / factory reset** and continue. This is required because the build is encrypted; it deletes internal storage.
 2. Go back to the main menu, choose **Apply update > Apply from ADB**.
-3. `adb sideload lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout.zip`
+3. `adb sideload lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout.zip` (Vanilla) or `adb sideload lineage-23.2-20261017-UNOFFICIAL-jasmine_sprout-GAPPS.zip` (GApps)
 4. When it finishes, go back and choose **Reboot system now**.
 
 The first boot takes a few minutes. If it drops back to the bootloader or recovery, redo the steps above.
