@@ -1,6 +1,6 @@
 # LineageOS
 
-[![LineageOS 23.2 - Mi A2](23.2/banner.png)](23.2/README.md)
+[![LineageOS 23.2 - Mi A2](23.2/20261017/banner.png)](23.2/README.md)
 
 **[LineageOS ROM Source Code](https://github.com/LineageOS)**
 
