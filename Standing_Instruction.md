@@ -12,8 +12,7 @@ When it comes to my custom ROMs, I've incorporated several important features an
 - **Build Type:** I typically provide user/userdebug builds, with the exception of the initial days following a new Android/ROM release.
 - **SELinux Enforcement:** My ROMs come with SELinux enforcement by default, providing enhanced security (except for the initial release days).
 - **Neverallow:** You'll find that my ROMs do not include any "neverallow" restrictions (with the exception of the initial release days).
-- **CTS Compatibility:** All my ROMs pass Compatibility Test Suite (CTS) by default. In case Google alters server-side settings, be patient for a fix.
-- **Google Play Store Certification:** You'll be pleased to know that all my ROMs are certified in the Google Play Store.
+- **Play Store certification / Play Integrity:** Not provided. My ROMs are not Play Store certified and are not guaranteed to pass Play Integrity (CTS), so apps that require it (some banking or payment apps, Google Wallet) may not work.
 - **Modifications and Hacks:** While I don't actively encourage the use of modifications or hacks, you're free to employ them at your own risk. Please note that I won't provide support for such alterations.
 - **DFE and Kernel:** Avoid flashing DFE separately, and refrain from changing the default kernel in the ROM. If you do decide to change it, make sure to choose a kernel that supports OSS Camera, QTI haptics, QTI PERF, and Aidl vibrator-based light HAL.
 - **Updates:** For installing updates, use ADB SIDELOAD with the provided recovery that is inbuilt.
