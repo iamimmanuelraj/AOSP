@@ -6,11 +6,13 @@
 
 ## Versions
 
+- [Changelog](../../CHANGELOGS/LineageOS.md)
+
 - [LineageOS 23.2 (Android 16) - Mi A2 (jasmine_sprout)](23.2/README.md)
 
 ## Device Source Codes - Mi A2
 
-- **Kernel Tree:** [Kernel tree - Mi A2 (branch fourteen-a16)](https://github.com/iamimmanuelraj/kernel_xiaomi_jasmine_sprout/tree/fourteen-a16)
+- **Kernel Tree:** [Kernel tree - Mi A2 (LineageOS SDM660 4.19, branch lineage-a16)](https://github.com/iamimmanuelraj/android_kernel_xiaomi_sdm660/tree/lineage-a16)
 
 ## Support
 
