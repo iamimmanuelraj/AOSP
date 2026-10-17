@@ -2,8 +2,10 @@
 
 ![LineageOS 23.2 - Mi A2](banner.png)
 
-**UNOFFICIAL - user build, release-keys signed - Encrypted build (file-based encryption, AES-256-XTS) - Build date 17.10.2026**
+**UNOFFICIAL - user build, release-keys signed - Encrypted build (file-based encryption, AES-256-XTS) - Build date 17.10.2026 (updated 18.10.2026)**
 
+> Updated 18.10.2026: battery and notification LED, charging control.
+>
 > Needs an unlocked bootloader. Changelog: [CHANGELOGS/LineageOS.md](../../../../CHANGELOGS/LineageOS.md).
 >
 > Known issues: Widevine is Level 3 only; only the Goodix fingerprint sensor is supported for now. Have a unit with an FPC sensor? Request it in the [Telegram group](https://t.me/immanuelsfoundation) and I'll add support.
