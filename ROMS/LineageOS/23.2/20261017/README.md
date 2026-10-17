@@ -8,7 +8,7 @@
 >
 > Known issues: Widevine is Level 3 only; only the Goodix fingerprint sensor is supported for now. Have a unit with an FPC sensor? Request it in the [Telegram group](https://t.me/immanuelsfoundation) and I'll add support.
 >
-> **Coming from the 09.10.2026 build or another ROM: clean install (format data).** This build is signed with different keys.
+> **⚠️ Clean flash required - all data will be lost.** You must format data, which erases everything on the phone: apps, settings, photos, downloads and the rest of internal storage. Back up first. This also applies if you are on the 09.10.2026 build (this one is signed with different keys).
 
 ## Build identifiers
 

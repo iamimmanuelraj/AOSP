@@ -2,7 +2,7 @@
 
 ## LineageOS 23.2 (Android 16) - 17.10.2026
 
-[Release](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261017) - user build, release-keys signed, security patch 2026-09-01. Clean install (format data) when coming from 09.10.2026 or another ROM.
+[Release](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261017) - user build, release-keys signed, security patch 2026-09-01. **Clean flash required - all data will be lost** (format data), also when coming from 09.10.2026.
 
 - Switched to the LineageOS SDM660 4.19 kernel
 - Mobile network: calls, SMS, mobile data, VoLTE and Wi-Fi calling
