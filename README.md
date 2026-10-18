@@ -1,19 +1,18 @@
 <div align="center">
 
-<img src=".github/assets/banner.png" alt="AOSP Builds - Xiaomi Mi A2 (jasmine_sprout)" width="100%">
+<img src=".github/assets/banner.png" alt="Android Builds by Immanuel Raj" width="100%">
 
-**Custom ROMs, recovery and changelogs for the Xiaomi Mi A2 (jasmine_sprout)**
+**Everything I build for Android: custom ROMs, kernels, recoveries, mods, changelogs and flashing guides.**
 
 [![Latest](https://img.shields.io/badge/Latest-LineageOS%2023.2%20%C2%B7%2017.10.2026-0b3d44?style=for-the-badge&logo=lineageos&logoColor=white)](https://github.com/iamimmanuelraj/AOSP/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/iamimmanuelraj/AOSP/total?label=Downloads&style=for-the-badge&color=1c6f6a&cacheSeconds=3600)](https://github.com/iamimmanuelraj/AOSP/releases)
-[![Device](https://img.shields.io/badge/Device-Mi%20A2%20%28jasmine__sprout%29-5ce1d0?style=for-the-badge)](#roms)
 [![Telegram](https://img.shields.io/badge/Support-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/immanuelsfoundation)
 
 </div>
 
 ---
 
-## Latest: LineageOS 23.2 (Android 16)
+## Latest: LineageOS 23.2 (Android 16) - Xiaomi Mi A2
 
 <a href="ROMS/LineageOS/23.2/20261017/README.md"><img src="ROMS/LineageOS/23.2/20261017/banner.png" alt="LineageOS 23.2 for Mi A2 - 17.10.2026" width="100%"></a>
 
@@ -29,24 +28,34 @@
 
 ## ROMs
 
-| ROM | Status | Download | Changelog |
-| --- | --- | --- | --- |
-| **LineageOS 23.2** (Android 16) | Unofficial · active | [GitHub Releases](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261017) | [LineageOS](CHANGELOGS/LineageOS.md) |
-| **PixelExperience** | Official | [download.pixelexperience.org](https://download.pixelexperience.org/jasmine_sprout) | [PixelExperience](ROMS/PixelExperience/README.md) |
-| **ArrowOS** | Official | [arrowos.net](https://arrowos.net/download) | [ArrowOS](ROMS/ArrowOS/README.md) |
-| **PixelExtended** | Official | [SourceForge](https://sourceforge.net/projects/pixelextended/files/jasmine_sprout) | [PixelExtended](ROMS/PixelExtended/README.md) |
-| **Legion OS** | Official | [SourceForge](https://sourceforge.net/projects/legionrom/files/jasmine_sprout) | - |
-| **PixelExperience** (old builds) | Unofficial | [SourceForge](https://sourceforge.net/projects/immanuelsbuilds/files/Pixel-Experience/) | [PixelExperience](ROMS/PixelExperience/README.md) |
-| **Freaky OS** | Unofficial · test builds | [SourceForge](https://sourceforge.net/projects/teamneon-ports/files/Test-Builds/freaky/) | - |
+| ROM | Device | Status | Download | Changelog |
+| --- | --- | --- | --- | --- |
+| **LineageOS 23.2** (Android 16) | Mi A2 | Unofficial · active | [GitHub Releases](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261017) | [LineageOS](CHANGELOGS/LineageOS.md) |
+| **PixelExperience** | Mi A2 | Official | [pixelexperience.org](https://download.pixelexperience.org/jasmine_sprout) | [PixelExperience](ROMS/PixelExperience/README.md) |
+| **PixelExperience** 11 Plus, 12, 12.1, 14 alpha | Mi A2 | Unofficial · archived | [GitHub release](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) | [PixelExperience](ROMS/PixelExperience/README.md) |
+| **PixelOS** 14 | Mi A2 | Unofficial · archived | [GitHub release](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) | - |
+| **ArrowOS** | Mi A2 | Official | [arrowos.net](https://arrowos.net/download) | [ArrowOS](ROMS/ArrowOS/README.md) |
+| **ArrowOS** 13 (GApps) | Mi A2 | Unofficial · archived | [GitHub release](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) | [ArrowOS](ROMS/ArrowOS/README.md) |
+| **PixelExtended** | Mi A2 · Redmi Note 5 Pro | Official | [Pling](https://www.pling.com/p/1655281) · [project SourceForge](https://sourceforge.net/projects/pixelextended/files/jasmine_sprout) | [PixelExtended](ROMS/PixelExtended/README.md) |
+| **Legion OS** | Mi A2 | Official | [project SourceForge](https://sourceforge.net/projects/legionrom/files/jasmine_sprout) | - |
+| **Freaky OS** | Mi A2 | Unofficial · test builds | [TeamNeon SourceForge](https://sourceforge.net/projects/teamneon-ports/files/Test-Builds/freaky/) | - |
 
-*Some other ROMs I've built, like EVOX and AEX, may not have links. If you find them, please let me know and I'll add them here.*
+*My own SourceForge projects were removed for inactivity, so all builds from them now live in the [Import From SourceForge](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) release. Some other ROMs I've built, like EVOX and AEX, may not have links. If you find them, let me know and I'll add them here.*
+
+## Kernels
+
+| Kernel | Device | Notes |
+| --- | --- | --- |
+| [android_kernel_xiaomi_sdm660](https://github.com/iamimmanuelraj/android_kernel_xiaomi_sdm660/tree/lineage-a16) | Mi A2 | LineageOS SDM660 4.19, branch `lineage-a16` - used by LineageOS 23.2 |
+| [kernel_xiaomi_jasmine_sprout](https://github.com/iamimmanuelraj/kernel_xiaomi_jasmine_sprout) | Mi A2 | 4.19 kernel with Android 16 support (first 23.2 test build) |
+| [android_kernel_xiaomi_jasmine_sprout](https://github.com/iamimmanuelraj/android_kernel_xiaomi_jasmine_sprout) | Mi A2 | Earlier kernel used by my older ROMs |
 
 ## Recovery and mods
 
-| Project | Status | Download |
-| --- | --- | --- |
-| **TWRP** - jasmine_sprout | Unofficial | [SourceForge](https://sourceforge.net/projects/immanuelsbuilds/files/TWRP/) · [Pling](https://www.pling.com/p/1671453) |
-| **Gboard Themer** - all devices | Own project · inactive | [iamimmanuelraj.github.io/Gboardthemer](https://iamimmanuelraj.github.io/Gboardthemer/) |
+| Project | Device | Status | Download |
+| --- | --- | --- | --- |
+| **TWRP** 3.5.2, 3.6 | Mi A2 | Unofficial · archived | [GitHub release](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) · [Pling](https://www.pling.com/p/1671453) |
+| **Gboard Themer** | All devices | Own project · inactive | [Theme enabler zips](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) · [Source](https://github.com/iamimmanuelraj/Gboardthemer) |
 
 ## Before you flash
 
@@ -58,10 +67,8 @@
 | [File-based encryption](FLASHING/FBE/About.md) | What FBE means for your data |
 
 <details>
-<summary><b>Alternate download mirrors</b></summary>
+<summary><b>Other mirrors</b></summary>
 
-- [PixelExperience UNOFFICIAL - old builds (SourceForge)](https://sourceforge.net/projects/pixelexperienceunofficial-mia2/)
-- [PixelExperience UNOFFICIAL - old builds (SourceForge, TeamNeon)](https://sourceforge.net/projects/teamneon-ports/files/Pixel-Experience/)
 - [PixelExperience UNOFFICIAL - old builds (Pling)](https://www.pling.com/p/1671391)
 - [PixelExperience UNOFFICIAL - old builds (AndroidFileHost)](https://androidfilehost.com/?w=files&flid=315505)
 - [Pixel Extended OFFICIAL - Mi A2 and Redmi Note 5 Pro (Pling)](https://www.pling.com/p/1655281)
