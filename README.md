@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src=".github/assets/banner.png" alt="Android Builds by Immanuel Raj" width="100%">
+<img src=".github/assets/banner-android-builds.png" alt="Android Builds by Immanuel Raj" width="100%">
 
 **Everything I build for Android: custom ROMs, kernels, recoveries, mods, changelogs and flashing guides.**
 
-[![Latest](https://img.shields.io/badge/Latest-LineageOS%2023.2%20%C2%B7%2017.10.2026-0b3d44?style=for-the-badge&logo=lineageos&logoColor=white)](https://github.com/iamimmanuelraj/AOSP/releases/latest)
+[![Latest](https://img.shields.io/badge/Latest-LineageOS%20%C2%B7%2017.10.2026%20%C2%B7%20Mi%20A2-0b3d44?style=for-the-badge&logo=lineageos&logoColor=white)](https://github.com/iamimmanuelraj/AOSP/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/iamimmanuelraj/AOSP/total?label=Downloads&style=for-the-badge&color=1c6f6a&cacheSeconds=3600)](https://github.com/iamimmanuelraj/AOSP/releases)
 [![Telegram](https://img.shields.io/badge/Support-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/immanuelsfoundation)
 
@@ -12,25 +12,11 @@
 
 ---
 
-## Latest: LineageOS 23.2 (Android 16) - Xiaomi Mi A2
-
-<a href="ROMS/LineageOS/23.2/20261017/README.md"><img src="ROMS/LineageOS/23.2/20261017/banner.png" alt="LineageOS 23.2 for Mi A2 - 17.10.2026" width="100%"></a>
-
-| | |
-| --- | --- |
-| **Build** | 17.10.2026 (updated 18.10.2026) - **Vanilla** and **GApps** |
-| **Type** | user build, release-keys signed, SELinux enforcing, dm-verity |
-| **Base** | 4.19 kernel, A/B retrofit dynamic partitions, EROFS, file-based + metadata encryption |
-| **Links** | [Download](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261017) · [Flashing guide](ROMS/LineageOS/23.2/20261017/README.md) · [Changelog](CHANGELOGS/LineageOS.md) · [All builds](ROMS/LineageOS/23.2/README.md) |
-
-> [!IMPORTANT]
-> Clean flash required: formatting data erases everything on the phone. Read the [Standing Instructions](Standing_Instruction.md) before flashing anything from here.
-
 ## ROMs
 
 | ROM | Device | Status | Download | Changelog |
 | --- | --- | --- | --- | --- |
-| **LineageOS 23.2** (Android 16) | Mi A2 | Unofficial · active | [GitHub Releases](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261017) | [LineageOS](CHANGELOGS/LineageOS.md) |
+| **LineageOS** | Mi A2 | Unofficial · active | [GitHub Releases](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261017) | [LineageOS](CHANGELOGS/LineageOS.md) |
 | **PixelExperience** | Mi A2 | Official | [pixelexperience.org](https://download.pixelexperience.org/jasmine_sprout) | [PixelExperience](ROMS/PixelExperience/README.md) |
 | **PixelExperience** 11 Plus, 12, 12.1, 14 alpha | Mi A2 | Unofficial · archived | [GitHub release](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) | [PixelExperience](ROMS/PixelExperience/README.md) |
 | **PixelOS** 14 | Mi A2 | Unofficial · archived | [GitHub release](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) | - |
