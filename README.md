@@ -4,8 +4,8 @@
 
 **Custom ROMs, recovery and changelogs for the Xiaomi Mi A2 (jasmine_sprout)**
 
-[![Latest release](https://img.shields.io/github/v/release/iamimmanuelraj/AOSP?display_name=release&label=Latest&style=for-the-badge&color=0b3d44)](https://github.com/iamimmanuelraj/AOSP/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/iamimmanuelraj/AOSP/total?label=Downloads&style=for-the-badge&color=1c6f6a)](https://github.com/iamimmanuelraj/AOSP/releases)
+[![Latest](https://img.shields.io/badge/Latest-LineageOS%2023.2%20%C2%B7%2017.10.2026-0b3d44?style=for-the-badge&logo=lineageos&logoColor=white)](https://github.com/iamimmanuelraj/AOSP/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/iamimmanuelraj/AOSP/total?label=Downloads&style=for-the-badge&color=1c6f6a&cacheSeconds=3600)](https://github.com/iamimmanuelraj/AOSP/releases)
 [![Device](https://img.shields.io/badge/Device-Mi%20A2%20%28jasmine__sprout%29-5ce1d0?style=for-the-badge)](#roms)
 [![Telegram](https://img.shields.io/badge/Support-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/immanuelsfoundation)
 
