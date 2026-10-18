@@ -17,9 +17,9 @@
 
 ## Support
 
+- [Report a bug or request a feature (GitHub issues)](https://github.com/iamimmanuelraj/AOSP/issues)
 - [PixelExtended ROM XDA](https://xdaforums.com/t/rom-official-pixel-extended-mi-a2-jasmine_sprout.4550155/)
 - [PixelExtended ROM Telegram OFFICIAL Support Group](https://t.me/pixelextended)
-- [My Personal Support Group](https://t.me/immanuelsfoundation)
 
 ## Donate
 

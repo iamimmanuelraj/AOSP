@@ -17,7 +17,7 @@
 
 ## Support
 
-- [My Personal Support Group](https://t.me/immanuelsfoundation)
+- [Report a bug or request a feature (GitHub issues)](https://github.com/iamimmanuelraj/AOSP/issues)
 
 ## Donate
 

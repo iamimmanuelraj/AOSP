@@ -6,7 +6,7 @@
 
 [![Latest](https://img.shields.io/badge/Latest-LineageOS%20%C2%B7%2017.10.2026%20%C2%B7%20Mi%20A2-0b3d44?style=for-the-badge&logo=lineageos&logoColor=white)](https://github.com/iamimmanuelraj/AOSP/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/iamimmanuelraj/AOSP/total?label=Downloads&style=for-the-badge&color=1c6f6a&cacheSeconds=3600)](https://github.com/iamimmanuelraj/AOSP/releases)
-[![Telegram](https://img.shields.io/badge/Support-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/immanuelsfoundation)
+[![Issues](https://img.shields.io/badge/Support-GitHub%20Issues-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/iamimmanuelraj/AOSP/issues)
 
 </div>
 

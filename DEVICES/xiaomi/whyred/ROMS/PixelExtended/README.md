@@ -15,8 +15,8 @@
 
 ## Support
 
+- [Report a bug or request a feature (GitHub issues)](https://github.com/iamimmanuelraj/AOSP/issues)
 - [PixelExtended ROM Telegram OFFICIAL Support Group](https://t.me/pixelextended)
-- [My Personal Support Group](https://t.me/immanuelsfoundation)
 
 ## Donate
 

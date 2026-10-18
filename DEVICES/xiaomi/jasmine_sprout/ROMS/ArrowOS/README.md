@@ -16,10 +16,10 @@
 
 ## Support
 
+- [Report a bug or request a feature (GitHub issues)](https://github.com/iamimmanuelraj/AOSP/issues)
 - [ArrowOS ROM 12.1 aka 12L XDA](https://forum.xda-developers.com/t/12-1-s-official-arrow-os-xiaomi-mi-a2-jasmine_sprout-22-04-2022.4435233/)
 - [ArrowOS ROM 13.0 XDA](https://forum.xda-developers.com/t/13-t-official-arrow-os-xiaomi-mi-a2-jasmine_sprout.4485215/)
 - [ArrowOS ROM Telegram Support Group](https://t.me/ArrowOSChat)
-- [My Personal Support Group](https://t.me/immanuelsfoundation)
 
 ## Donate
 
