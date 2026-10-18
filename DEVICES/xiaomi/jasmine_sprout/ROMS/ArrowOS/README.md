@@ -1,4 +1,4 @@
-# ArrowOS
+# ArrowOS - Xiaomi Mi A2 (jasmine_sprout)
 
 **[ArrowOS ROM Source Code](https://github.com/ArrowOS)**
 

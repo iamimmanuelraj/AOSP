@@ -80,7 +80,7 @@ Absolutely, you can flash Non FBE ROMs through that too!
 ```
 
 Check this out!
-https://github.com/iamimmanuelraj/AOSP/tree/main/ROMS
+[Mi A2 ROMs](../../README.md)
 
 # Sources, References and Thanks!  
 - [AOSP's Documentation Regarding FBE](https://source.android.com/security/encryption/file-based)

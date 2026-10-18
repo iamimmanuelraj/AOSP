@@ -1,4 +1,4 @@
-# PixelExperience
+# PixelExperience - Xiaomi Mi A2 (jasmine_sprout)
 
 **[PixelExperience ROM Source Code](https://github.com/PixelExperience)**
 
@@ -8,7 +8,7 @@
 - **Kernel Tree:** [Device Source Codes Kernel tree - Mi A2](https://github.com/PixelExperience-Devices/kernel_xiaomi_jasmine_sprout)
 - **Vendor Tree:** [Device Source Codes Vendor tree - Mi A2](https://gitlab.pixelexperience.org/android/vendor-blobs/vendor_xiaomi_jasmine_sprout)
 
-**[PixelExperience ROM Changelogs](https://github.com/iamimmanuelraj/AOSP/blob/main/CHANGELOGS/PixelExperience.md)**
+**[PixelExperience ROM Changelogs](CHANGELOG.md)**
 
 **Official Builds:**
 
@@ -16,7 +16,7 @@
 
 **Unofficial Builds:**
 
-- [PixelExperience UNOFFICIAL-OLD BUILDS - MI A2](https://sourceforge.net/projects/pixelexperienceunofficial-mia2/)
+- [PixelExperience UNOFFICIAL-OLD BUILDS - MI A2 (GitHub release)](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge)
 - [PixelExperience UNOFFICIAL-OLD BUILDS - MI A2](https://sourceforge.net/projects/teamneon-ports/files/Pixel-Experience/)
 - [PixelExperience UNOFFICIAL-OLD BUILDS - MI A2](https://www.pling.com/p/1671391)
 - [PixelExperience UNOFFICIAL-OLD BUILDS - MI A2](https://androidfilehost.com/?w=files&flid=315505)

@@ -6,7 +6,7 @@
 
 > Updated 18.10.2026: battery and notification LED, charging control.
 >
-> Needs an unlocked bootloader. Changelog: [CHANGELOGS/LineageOS.md](../../../../CHANGELOGS/LineageOS.md).
+> Needs an unlocked bootloader. Changelog: [CHANGELOG.md](../../CHANGELOG.md).
 >
 > Known issues: Widevine is Level 3 only; only the Goodix fingerprint sensor is supported for now. Have a unit with an FPC sensor? Request it in the [Telegram group](https://t.me/immanuelsfoundation) and I'll add support.
 >

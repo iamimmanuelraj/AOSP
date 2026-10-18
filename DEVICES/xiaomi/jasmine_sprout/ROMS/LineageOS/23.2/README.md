@@ -9,4 +9,4 @@
 
 All builds: 4.19 kernel, A/B retrofit dynamic partitions, EROFS, file-based encryption, QTI haptics.
 
-Changelog: [CHANGELOGS/LineageOS.md](../../../CHANGELOGS/LineageOS.md)
+Changelog: [CHANGELOG.md](../CHANGELOG.md)

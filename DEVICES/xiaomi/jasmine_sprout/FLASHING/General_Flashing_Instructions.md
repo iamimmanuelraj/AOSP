@@ -1,6 +1,6 @@
 # Clean flashing
 
-Note: For Flashing `A13[Dynamic Partiton ROMS]` check flashing instruction in [HERE](https://github.com/iamimmanuelraj/AOSP/blob/main/FLASHING/RETROFIT_DYNAMIC_PARTITION/Flashing_Instructions.md)
+Note: For Flashing `A13[Dynamic Partiton ROMS]` check flashing instruction in [HERE](RETROFIT_DYNAMIC_PARTITION/Flashing_Instructions.md)
 
 This flashing instruction is for `A/B partition`.
 

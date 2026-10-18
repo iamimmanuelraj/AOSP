@@ -1,6 +1,4 @@
-## Comprehensive Guidelines and Information
-
-**Standing Instructions**
+# Standing Instructions - Xiaomi Mi A2 (jasmine_sprout)
 
 Before you delve into utilizing my software, please take a moment to familiarize yourself with these standing instructions. I want to emphasize that I bear no responsibility for any damage to your phone or offer support for instances of carelessness or actions not explicitly outlined here.
 
