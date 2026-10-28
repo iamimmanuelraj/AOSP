@@ -1,5 +1,13 @@
 # LineageOS changelog - Xiaomi Mi A2 (jasmine_sprout)
 
+## LineageOS 23.2 (Android 16) - 28.10.2026
+
+[Release](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261028) - user build, release-keys signed, security patch 2026-10-01. **Coming from 17.10.2026: no wipe needed** (same keys, install as an update). New install: clean flash (format data).
+
+- Bluetooth fixed: it crashed at every start on 17.10.2026 (the SELinux certificate map listed the AOSP test key instead of the release key)
+- Synced with the latest LineageOS 23.2 source - security update shown in Settings: 1 October 2026 (was 1 September 2026)
+- Device tree, vendor and kernel unchanged from 17.10.2026
+
 ## LineageOS 23.2 (Android 16) - 17.10.2026
 
 [Release](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261017) - user build, release-keys signed, security patch 2026-09-01. **Clean flash required - all data will be lost** (format data), also when coming from 09.10.2026.
