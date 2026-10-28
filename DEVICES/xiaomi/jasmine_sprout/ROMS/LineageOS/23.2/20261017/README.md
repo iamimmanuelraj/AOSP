@@ -4,7 +4,7 @@
 
 **UNOFFICIAL - user build, release-keys signed - Encrypted build (file-based encryption, AES-256-XTS) - Build date 17.10.2026 (updated 18.10.2026)**
 
-> **⚠️ Bluetooth crashes at every start on this build. Update to [28.10.2026](../20261028/README.md) (no wipe needed).**
+> **⚠️ Bluetooth crashes at every start on this build, and the GApps zip stops with error 28. Update to [28.10.2026](../20261028/README.md) (no wipe needed).**
 >
 > Updated 18.10.2026: battery and notification LED, charging control.
 >

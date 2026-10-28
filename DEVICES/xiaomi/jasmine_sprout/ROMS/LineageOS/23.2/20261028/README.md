@@ -4,7 +4,7 @@
 
 **UNOFFICIAL - user build, release-keys signed - Encrypted build (file-based encryption, AES-256-XTS) - Build date 28.10.2026**
 
-> **Bluetooth fix:** on 17.10.2026 Bluetooth crashed at every start. This build fixes it, and it is synced with the latest LineageOS 23.2 source (security update shown in Settings: 1 October 2026).
+> **Bluetooth and GApps install fix:** on 17.10.2026 Bluetooth crashed at every start, and the GApps zip stopped with error 28 in recovery. This build fixes both, and it is synced with the latest LineageOS 23.2 source (security update shown in Settings: 1 October 2026).
 >
 > Needs an unlocked bootloader. Changelog: [CHANGELOG.md](../../CHANGELOG.md).
 >

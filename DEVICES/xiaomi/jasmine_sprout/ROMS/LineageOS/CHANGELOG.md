@@ -5,6 +5,7 @@
 [Release](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261028) - user build, release-keys signed, security patch 2026-10-01. **Coming from 17.10.2026: no wipe needed** (same keys, install as an update). New install: clean flash (format data).
 
 - Bluetooth fixed: it crashed at every start on 17.10.2026 (the SELinux certificate map listed the AOSP test key instead of the release key)
+- GApps zip installs again: on 17.10.2026 recovery stopped it with error 28 (the zip was a few minutes older than the recovery image, so recovery treated it as a downgrade)
 - Synced with the latest LineageOS 23.2 source - security update shown in Settings: 1 October 2026 (was 1 September 2026)
 - Device tree, vendor and kernel unchanged from 17.10.2026
 
