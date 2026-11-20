@@ -58,6 +58,13 @@ export function writeFeeds(devices, outDir) {
         }
       }
     }
+    // feeds a device page asks for before its first release (front matter `ota_feeds: [lineageos-24]`): publish [] so
+    // builds that already point at them see "no update" instead of an error
+    for (const slug of d.data?.ota_feeds || []) for (const v of VARIANTS) {
+      const f = path.join(outDir, 'ota', d.codename, slug, `unofficial-${v}.json`);
+      if (fs.existsSync(f)) continue;
+      fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, '[]\n'); written.push(path.relative(outDir, f));
+    }
   }
   return written;
 }

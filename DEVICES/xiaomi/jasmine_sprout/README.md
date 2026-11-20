@@ -1,3 +1,7 @@
+---
+# Site data (aosp.immanuelraj.dev). ota_feeds: Updater feeds published even before the first release.
+ota_feeds: [lineageos-24]
+---
 # Xiaomi Mi A2 (jasmine_sprout)
 
 [![Latest](https://img.shields.io/badge/Latest-LineageOS%20%C2%B7%2017.10.2026-0b3d44?style=for-the-badge&logo=lineageos&logoColor=white)](ROMS/LineageOS/README.md)
