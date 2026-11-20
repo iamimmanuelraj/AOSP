@@ -1,5 +1,7 @@
 # Xiaomi Redmi Note 5 Pro (whyred)
 
+Snapdragon 636 · official PixelExtended builds I maintained for the Redmi Note 5 Pro.
+
 ## ROMs
 
 | ROM | Status | Download | Docs |
