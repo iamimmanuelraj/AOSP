@@ -148,12 +148,18 @@ function renderMarkdown(body, file) {
   return marked.parse(body);
 }
 
+// sections of the root README that are whole pages on the site ("Back to all devices" -> /devices/)
+const ROOT_README_PAGES = { devices: 'devices/' };
+
 function rewriteHref(href, file) {
   if (/^(https?:|mailto:|#|data:)/.test(href)) return href;
   const [p, hash] = href.split('#');
   const target = path.resolve(path.dirname(file), decodeURIComponent(p));
   if (routeByFile.has(target)) return BASE + routeByFile.get(target) + (hash ? `#${hash}` : '');
-  if (target === path.join(ROOT, 'README.md')) return BASE + (hash ? `#${hash}` : '');
+  if (target === path.join(ROOT, 'README.md')) {
+    if (hash && ROOT_README_PAGES[hash]) return BASE + ROOT_README_PAGES[hash]; // a README section that has its own page on the site
+    return BASE + (hash ? `#${hash}` : '');
+  }
   if (fs.existsSync(target) && fs.statSync(target).isDirectory()) {
     const r = path.join(target, 'README.md');
     if (routeByFile.has(r)) return BASE + routeByFile.get(r);

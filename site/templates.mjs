@@ -148,6 +148,8 @@ const FEATURE_ICONS = {
 
 // install-steps anchor per release route, filled while release pages render (they render before the install page)
 const stepsAnchor = new Map();
+// downloads anchor per release route, same idea (the home page links its Download button straight to the file table)
+const downloadsAnchor = new Map();
 
 export const page = {
   home(ctx) {
@@ -161,7 +163,7 @@ export const page = {
       <h1>Keep your phone <span class="accent">fast, current and yours.</span></h1>
       <p class="lead">Signed Android builds with clear release notes, honest known issues and step-by-step install guides. Free, unofficial and made with care.</p>
       <div class="actions">
-        ${latest ? `<a class="btn btn-accent" href="${BASE}${latest.route}">Download ${esc(romLabel(latest))}</a>` : ''}
+        ${latest ? `<a class="btn btn-accent" href="${BASE}${latest.route}${downloadsAnchor.get(latest.route) ? `#${downloadsAnchor.get(latest.route)}` : ''}">Download ${esc(romLabel(latest))}</a>` : ''}
         <a class="btn btn-ghost" href="${BASE}devices/">Browse devices</a>
       </div>
     </div>
@@ -266,6 +268,7 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
     // the install steps heading differs per release: link to the first heading that is about flashing
     const steps = (html.match(/id="(flashing-instructions[^"]*)"/) || html.match(/id="([^"]*flash[^"]*)"/) || [])[1];
     stepsAnchor.set(r.route, steps);
+    downloadsAnchor.set(r.route, /id="downloads"/.test(html) ? 'downloads' : '');
     return layout(ctx, { title: r.title, description: `${r.title}: release notes, downloads, checksums and install steps.`, route: r.route,
       ogImage: r.banner ? BASE + r.banner : undefined, body: `
 ${hero(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route], [r.os, `${r.route.split('/').slice(0, -3).join('/')}/`], [fmtDate(r.date), r.route]], `
@@ -355,7 +358,9 @@ ${hero(ctx, [['Home', ''], ['Updates', 'updates/']], '<h1>Updates</h1><p class="
   },
 
   support(ctx) {
-    const { REPO, BASE } = ctx;
+    const { REPO, BASE, devices } = ctx;
+    // the standing instructions guide of the first device that has one (falls back to the device list)
+    const standing = devices.flatMap((d) => d.guides).find((g) => /standing/i.test(g.title));
     const faq = [
       ['Will flashing erase my phone?', 'Unlocking the bootloader and a clean install both erase everything on the phone. Updates between builds signed with the same keys keep your data; each release page says which case applies.'],
       ['Which file do I download?', 'Each release page lists every file and what it is for. Vanilla has no Google apps; GApps has them built in. Always check the SHA-256 checksum.'],
@@ -368,7 +373,7 @@ ${hero(ctx, [['Home', ''], ['Support', 'support/']], `<h1>Support</h1><p class="
   <div class="actions"><a class="btn btn-accent" href="${REPO}/issues/new/choose" rel="noopener">Open an issue</a><a class="btn btn-ghost" href="${REPO}/issues?q=" rel="noopener">Search issues</a></div>`)}
 <section class="section tight"><div class="shell narrow"><div class="section-head"><span class="eyebrow">FAQ</span><h2>Before you ask</h2></div>
   <div class="faq">${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>
-  <p class="muted">Device-specific rules are on each device page, for example the <a href="${BASE}devices/">standing instructions</a>.</p>
+  <p class="muted">Device-specific rules are on each device page, for example the <a href="${BASE}${standing ? standing.route : 'devices/'}">standing instructions</a>.</p>
 </div></section>` });
   },
 

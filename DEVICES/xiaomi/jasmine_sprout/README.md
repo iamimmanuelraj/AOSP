@@ -59,4 +59,4 @@ Snapdragon 660 · A/B · everything I've built for the Mi A2. Read the [Standing
 
 *Changelogs: I've tried to remember and add all of them. Very old builds may not have one, and some builds in between may never have been released or logged.*
 
-[Back to all devices](../../../README.md)
+[Back to all devices](../../../README.md#devices)
