@@ -8,7 +8,7 @@
 >
 > Needs an unlocked bootloader. Changelog: [CHANGELOG.md](../../CHANGELOG.md).
 >
-> Known issues: Widevine is Level 3 only; only the Goodix fingerprint sensor is supported for now. Have a unit with an FPC sensor? [Open an issue](https://github.com/iamimmanuelraj/AOSP/issues) and I'll add support.
+> Known issues: Widevine is Level 3 only. Fingerprint: Goodix and FPC sensors are supported (FPC confirmed by a user on 28.10.2026).
 >
 > **Coming from 17.10.2026: no wipe needed**, see [Updating from 17.10.2026](#updating-from-17102026).
 >

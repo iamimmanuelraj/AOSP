@@ -17,7 +17,7 @@
 - Two variants: Vanilla and GApps (MindTheGapps built in; not Play Store certified)
 - Switched to the LineageOS SDM660 4.19 kernel
 - Mobile network: calls, SMS, mobile data, VoLTE and Wi-Fi calling
-- Fingerprint (Goodix) and double tap to wake
+- Fingerprint (Goodix and FPC sensors) and double tap to wake
 - Battery: correct battery profile, temperature, charging and design capacity; RRADC / fuel gauge fixes
 - USB: file transfer (MTP), USB tethering and adb through the QTI USB gadget HAL
 - Audio: real-time priority for the audio HAL; dual-mic noise suppression for recording, voice notes, VoIP and calls; corrected stereo mic routing
@@ -30,7 +30,7 @@
 - Removed features the phone does not have (barometer, unused HALs)
 - SELinux and log cleanup (denials, log spam, CPU boost errors)
 
-Known issues: Widevine L3 only; only the Goodix fingerprint sensor is supported for now. Have an FPC-sensor unit? [Open an issue](https://github.com/iamimmanuelraj/AOSP/issues) and I'll add support.
+Known issues: Widevine L3 only. Fingerprint: Goodix and FPC sensors are supported (FPC confirmed by a user on 28.10.2026).
 
 ## LineageOS 23.2 (Android 16) - 09.10.2026
 
