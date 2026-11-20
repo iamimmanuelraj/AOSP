@@ -1,0 +1,709 @@
+{
+ "$schema": "../../../site/installer/device.schema.json",
+ "name": "Xiaomi Mi A2",
+ "codename": "jasmine_sprout",
+ "notes": "Steps follow LOS24-jasmine flash-fastboot.sh (bootloader-only install of retrofit super images) and Xiaomi's V11.0.28 flash_all.sh.",
+ "match": {
+  "product": [
+   "jasmine"
+  ]
+ },
+ "usb": {
+  "fastboot": {
+   "classCode": 255,
+   "subclassCode": 66,
+   "protocolCode": 3
+  }
+ },
+ "slots": [
+  "a",
+  "b"
+ ],
+ "files": {
+  "boot": {
+   "label": "boot.img",
+   "match": "(^|-)boot\\.img$",
+   "from": "release"
+  },
+  "vbmeta": {
+   "label": "vbmeta.img",
+   "match": "(^|-)vbmeta\\.img$",
+   "from": "release"
+  },
+  "super_system": {
+   "label": "super_system.img",
+   "match": "super_system\\.img$",
+   "from": "release"
+  },
+  "super_vendor": {
+   "label": "super_vendor.img",
+   "match": "super_vendor\\.img$",
+   "from": "release"
+  },
+  "sums": {
+   "label": "SHA256SUMS",
+   "match": "^SHA256SUMS$",
+   "from": "release",
+   "checksums": true
+  },
+  "stock:bluetooth.img": {
+   "label": "bluetooth.img",
+   "match": "^bluetooth\\.img$",
+   "from": "stock",
+   "size": 569344,
+   "sha256": "520cfc1eca1fa07074fade91a03ad0dbe19a6d64f03296f63a4487691c9316d0"
+  },
+  "stock:devcfg.img": {
+   "label": "devcfg.img",
+   "match": "^devcfg\\.img$",
+   "from": "stock",
+   "size": 49068,
+   "sha256": "80ea536b9ee1d661b44233fc6fdb1b1bfe7126019c45fe3899b355e0d79d6adf"
+  },
+  "stock:dsp.img": {
+   "label": "dsp.img",
+   "match": "^dsp\\.img$",
+   "from": "stock",
+   "size": 16777216,
+   "sha256": "dcf2d529e54f245583f0e661531110c83abd9da0d6c921584ec0132e5052e3f7"
+  },
+  "stock:modem.img": {
+   "label": "modem.img",
+   "match": "^modem\\.img$",
+   "from": "stock",
+   "size": 110757376,
+   "sha256": "3134018bd2a0f6079571985b2634cc204599ed71b61de8a5e72ea32febaf28e7"
+  },
+  "stock:xbl.img": {
+   "label": "xbl.img",
+   "match": "^xbl\\.img$",
+   "from": "stock",
+   "size": 2564601,
+   "sha256": "192809daa2f87c6016ff1846adc95d507e07f7fe22164006a544c630e1470206"
+  },
+  "stock:pmic.img": {
+   "label": "pmic.img",
+   "match": "^pmic\\.img$",
+   "from": "stock",
+   "size": 39864,
+   "sha256": "ff7e2e0a223bf24fc7380488d6baa9131547192782583d8a9a506a790434777f"
+  },
+  "stock:rpm.img": {
+   "label": "rpm.img",
+   "match": "^rpm\\.img$",
+   "from": "stock",
+   "size": 224808,
+   "sha256": "c9978f56e5626c6b4152712fa9f54883ec09caacc3ac086674ac8d0e77d63c10"
+  },
+  "stock:tz.img": {
+   "label": "tz.img",
+   "match": "^tz\\.img$",
+   "from": "stock",
+   "size": 1970176,
+   "sha256": "cf7ed3d9e0d5c671fedef8e07f03def7960567a6c13be2e78d7fc463c43e489b"
+  },
+  "stock:hyp.img": {
+   "label": "hyp.img",
+   "match": "^hyp\\.img$",
+   "from": "stock",
+   "size": 278528,
+   "sha256": "98d7b7d594dd26e5a16c74e082d4625dde3838a3503d3f029c4ac0fe52725cdc"
+  },
+  "stock:keymaster.img": {
+   "label": "keymaster.img",
+   "match": "^keymaster\\.img$",
+   "from": "stock",
+   "size": 316072,
+   "sha256": "34e84f924c69ab79944de9f926c59f3db963f3fff36b1bb066d83c97992fc782"
+  },
+  "stock:cmnlib64.img": {
+   "label": "cmnlib64.img",
+   "match": "^cmnlib64\\.img$",
+   "from": "stock",
+   "size": 274128,
+   "sha256": "32c7caa91d9b8ec8b045312391a5183c436755eda7b4faedf4264896c74c8f4e"
+  },
+  "stock:cmnlib.img": {
+   "label": "cmnlib.img",
+   "match": "^cmnlib\\.img$",
+   "from": "stock",
+   "size": 222192,
+   "sha256": "c32ffaf18fc5b92cd7c048fff5b65de049b0848bedab0e67e9c95abde415269d"
+  },
+  "stock:abl.elf": {
+   "label": "abl.elf",
+   "match": "^abl\\.elf$",
+   "from": "stock",
+   "size": 151552,
+   "sha256": "efa1d0f94727ba62556a6d028c013b221c013b966e0a1dcc0aab68156dfafcae"
+  },
+  "stock:boot.img": {
+   "label": "boot.img",
+   "match": "^boot\\.img$",
+   "from": "stock",
+   "size": 33244490,
+   "sha256": "73b3e04953f397e5012e6c7dd400f02c64c4a5fdfa38a71795fa057ba20e7cb9"
+  },
+  "stock:system.img": {
+   "label": "system.img",
+   "match": "^system\\.img$",
+   "from": "stock",
+   "size": 2656256688,
+   "sha256": "699bdc5131d48f939c6267138137c88d7a9671e93e44817675d5c422398460ea"
+  },
+  "stock:vendor.img": {
+   "label": "vendor.img",
+   "match": "^vendor\\.img$",
+   "from": "stock",
+   "size": 715792736,
+   "sha256": "c5091a378bb9b32660dbb6cf116efff121534328c9059286ddb619e661ddb8d7"
+  },
+  "stock:userdata.img": {
+   "label": "userdata.img",
+   "match": "^userdata\\.img$",
+   "from": "stock",
+   "size": 2748756,
+   "sha256": "e1eb6df51db57c0e11af8d5ceb3f82ac2aa060c273fc0cad9358207f9ad04661"
+  },
+  "stock:mdtp.img": {
+   "label": "mdtp.img",
+   "match": "^mdtp\\.img$",
+   "from": "stock",
+   "size": 17808306,
+   "sha256": "1e211f09a30d4c3196833608dd6168efe7c3d4da95a08ee6dee1cc799d258738"
+  },
+  "stock:splash.img": {
+   "label": "splash.img",
+   "match": "^splash\\.img$",
+   "from": "stock",
+   "size": 27232604,
+   "sha256": "b707a13a805c15a61f7855c11c9ff2071dce7a9647c63e63cf9d715dd08836e4"
+  },
+  "stock:mdtpsecapp.img": {
+   "label": "mdtpsecapp.img",
+   "match": "^mdtpsecapp\\.img$",
+   "from": "stock",
+   "size": 1082952,
+   "sha256": "bee81a6224dba011a2ff44f32505120710879a1d4fe9f60a80fc9a38c018fca1"
+  },
+  "stock:storsec.mbn": {
+   "label": "storsec.mbn",
+   "match": "^storsec\\.mbn$",
+   "from": "stock",
+   "size": 49168,
+   "sha256": "f5c9094b4b36a298d7c27a216840da04cdefd22f582f0539ae133a0b7cbc5f28"
+  }
+ },
+ "sources": {
+  "release": {
+   "title": "LineageOS release files",
+   "help": "Download boot.img, vbmeta.img, super_system.img, super_vendor.img and SHA256SUMS from the release page, then select them all here. Every file is checked against SHA256SUMS before anything is flashed."
+  },
+  "stock": {
+   "title": "Stock firmware V11.0.28.0.QDIMIXM (Android 10)",
+   "help": "Download jasmine_global_images_V11.0.28.0.QDIMIXM_10.0 (fastboot ROM .tgz) from Xiaomi, extract it (7-Zip on Windows, tar on Linux/macOS) and select its images folder. Only this exact version is accepted: older firmware can trigger anti-rollback and brick the phone."
+  }
+ },
+ "flows": {
+  "unlock": {
+   "title": "Unlock the bootloader",
+   "summary": "From stock: allow flashing. Erases everything on the phone.",
+   "before": [
+    "Back up everything: unlocking erases the phone.",
+    "In Android: Settings > About phone > tap Build number 7 times, then Settings > System > Developer options > turn on OEM unlocking.",
+    "Turn the phone off, then hold Volume Down + Power until FASTBOOT appears, and connect it to this computer."
+   ],
+   "files": [],
+   "steps": [
+    {
+     "do": "check",
+     "var": "product",
+     "in": [
+      "jasmine"
+     ],
+     "fail": "This is not a Mi A2."
+    },
+    {
+     "do": "check",
+     "var": "unlocked",
+     "in": [
+      "no"
+     ],
+     "skipRestIfNot": true,
+     "note": "Already unlocked: nothing to do."
+    },
+    {
+     "do": "command",
+     "cmd": "flashing unlock",
+     "phone": "On the phone: press Volume Up to select UNLOCK, then Power to confirm. The phone erases itself."
+    },
+    {
+     "do": "reconnect",
+     "text": "If the phone left fastboot, hold Volume Down + Power until FASTBOOT appears again, then press Reconnect."
+    },
+    {
+     "do": "command",
+     "cmd": "flashing unlock_critical",
+     "phone": "On the phone: confirm once more with the volume keys and Power.",
+     "optional": true
+    },
+    {
+     "do": "reconnect",
+     "text": "Back in FASTBOOT? Press Reconnect."
+    },
+    {
+     "do": "check",
+     "var": "unlocked",
+     "in": [
+      "yes"
+     ],
+     "fail": "Still locked. Boot Android, make sure OEM unlocking is on, and try again."
+    },
+    {
+     "do": "done",
+     "text": "Unlocked. You can install LineageOS now."
+    }
+   ],
+   "enabled": false,
+   "disabledText": "Being tested on a real Mi A2. This flow opens once it has passed end to end; until then use the command-line steps on the release page."
+  },
+  "install": {
+   "title": "Install LineageOS",
+   "summary": "Flash a LineageOS release from the bootloader. Needs an unlocked bootloader.",
+   "before": [
+    "Unlock the bootloader first (the Unlock tab).",
+    "Charge the phone to at least 50 %.",
+    "Boot to FASTBOOT (Volume Down + Power) and connect it."
+   ],
+   "options": {
+    "wipe": {
+     "label": "Clean install: erase all data",
+     "default": true,
+     "help": "Needed for a first install or when the release page says clean flash. Turn off only to update a build signed with the same keys."
+    },
+    "firmware": {
+     "label": "Also flash the stock V11.0.28 firmware to both slots",
+     "default": false,
+     "help": "Recommended once per phone, so both slots have the same firmware. Needs the stock firmware folder and a critical unlock."
+    }
+   },
+   "files": [
+    "boot",
+    "vbmeta",
+    "super_system",
+    "super_vendor",
+    "sums"
+   ],
+   "steps": [
+    {
+     "do": "check",
+     "var": "product",
+     "in": [
+      "jasmine"
+     ],
+     "fail": "This is not a Mi A2."
+    },
+    {
+     "do": "check",
+     "var": "unlocked",
+     "in": [
+      "yes"
+     ],
+     "fail": "The bootloader is locked. Use the Unlock tab first."
+    },
+    {
+     "do": "slot",
+     "as": "T",
+     "from": "current"
+    },
+    {
+     "do": "flash",
+     "part": "bluetooth",
+     "slot": "both",
+     "file": "stock:bluetooth.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "devcfg",
+     "slot": "both",
+     "file": "stock:devcfg.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "dsp",
+     "slot": "both",
+     "file": "stock:dsp.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "modem",
+     "slot": "both",
+     "file": "stock:modem.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "xbl",
+     "slot": "both",
+     "file": "stock:xbl.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "pmic",
+     "slot": "both",
+     "file": "stock:pmic.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "rpm",
+     "slot": "both",
+     "file": "stock:rpm.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "tz",
+     "slot": "both",
+     "file": "stock:tz.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "hyp",
+     "slot": "both",
+     "file": "stock:hyp.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "keymaster",
+     "slot": "both",
+     "file": "stock:keymaster.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "cmnlib64",
+     "slot": "both",
+     "file": "stock:cmnlib64.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "cmnlib",
+     "slot": "both",
+     "file": "stock:cmnlib.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "abl",
+     "slot": "both",
+     "file": "stock:abl.elf",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "mdtp",
+     "slot": "both",
+     "file": "stock:mdtp.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "mdtpsecapp",
+     "slot": "both",
+     "file": "stock:mdtpsecapp.img",
+     "if": "firmware"
+    },
+    {
+     "do": "flash",
+     "part": "system",
+     "slot": "T",
+     "file": "super_system"
+    },
+    {
+     "do": "flash",
+     "part": "vendor",
+     "slot": "T",
+     "file": "super_vendor"
+    },
+    {
+     "do": "flash",
+     "part": "boot",
+     "slot": "T",
+     "file": "boot"
+    },
+    {
+     "do": "flash",
+     "part": "vbmeta",
+     "slot": "T",
+     "file": "vbmeta"
+    },
+    {
+     "do": "erase",
+     "part": "userdata",
+     "if": "wipe",
+     "note": "erase, not format: a blank userdata gets a fresh metadata-encryption key on first boot"
+    },
+    {
+     "do": "erase",
+     "part": "logdump",
+     "if": "wipe",
+     "note": "logdump holds /metadata on this phone"
+    },
+    {
+     "do": "zero",
+     "part": "misc",
+     "bytes": 2048,
+     "note": "clear any pending recovery command"
+    },
+    {
+     "do": "setActive",
+     "slot": "T"
+    },
+    {
+     "do": "reboot"
+    },
+    {
+     "do": "done",
+     "text": "Done. The first boot takes a few minutes."
+    }
+   ],
+   "enabled": false,
+   "disabledText": "Being tested on a real Mi A2. This flow opens once it has passed end to end; until then use the command-line steps on the release page."
+  },
+  "stock": {
+   "title": "Back to stock",
+   "summary": "Restore Xiaomi's Android 10 (V11.0.28) exactly like flash_all.sh. Erases everything.",
+   "before": [
+    "This replaces LineageOS with stock Android 10 and erases all data.",
+    "Needs an unlocked and critical-unlocked bootloader.",
+    "Boot to FASTBOOT (Volume Down + Power) and connect it."
+   ],
+   "files": [
+    "stock:bluetooth.img",
+    "stock:devcfg.img",
+    "stock:dsp.img",
+    "stock:modem.img",
+    "stock:xbl.img",
+    "stock:pmic.img",
+    "stock:rpm.img",
+    "stock:tz.img",
+    "stock:hyp.img",
+    "stock:keymaster.img",
+    "stock:cmnlib64.img",
+    "stock:cmnlib.img",
+    "stock:abl.elf",
+    "stock:boot.img",
+    "stock:system.img",
+    "stock:vendor.img",
+    "stock:userdata.img",
+    "stock:mdtp.img",
+    "stock:splash.img",
+    "stock:mdtpsecapp.img",
+    "stock:storsec.mbn"
+   ],
+   "steps": [
+    {
+     "do": "check",
+     "var": "product",
+     "in": [
+      "jasmine"
+     ],
+     "fail": "This is not a Mi A2."
+    },
+    {
+     "do": "check",
+     "var": "unlocked",
+     "in": [
+      "yes"
+     ],
+     "fail": "The bootloader is locked. Unlock it first."
+    },
+    {
+     "do": "flash",
+     "part": "bluetooth",
+     "slot": "both",
+     "file": "stock:bluetooth.img"
+    },
+    {
+     "do": "flash",
+     "part": "devcfg",
+     "slot": "both",
+     "file": "stock:devcfg.img"
+    },
+    {
+     "do": "flash",
+     "part": "dsp",
+     "slot": "both",
+     "file": "stock:dsp.img"
+    },
+    {
+     "do": "flash",
+     "part": "modem",
+     "slot": "both",
+     "file": "stock:modem.img"
+    },
+    {
+     "do": "flash",
+     "part": "xbl",
+     "slot": "both",
+     "file": "stock:xbl.img"
+    },
+    {
+     "do": "flash",
+     "part": "pmic",
+     "slot": "both",
+     "file": "stock:pmic.img"
+    },
+    {
+     "do": "flash",
+     "part": "rpm",
+     "slot": "both",
+     "file": "stock:rpm.img"
+    },
+    {
+     "do": "flash",
+     "part": "tz",
+     "slot": "both",
+     "file": "stock:tz.img"
+    },
+    {
+     "do": "flash",
+     "part": "hyp",
+     "slot": "both",
+     "file": "stock:hyp.img"
+    },
+    {
+     "do": "flash",
+     "part": "keymaster",
+     "slot": "both",
+     "file": "stock:keymaster.img"
+    },
+    {
+     "do": "flash",
+     "part": "cmnlib64",
+     "slot": "both",
+     "file": "stock:cmnlib64.img"
+    },
+    {
+     "do": "flash",
+     "part": "cmnlib",
+     "slot": "both",
+     "file": "stock:cmnlib.img"
+    },
+    {
+     "do": "flash",
+     "part": "abl",
+     "slot": "both",
+     "file": "stock:abl.elf"
+    },
+    {
+     "do": "flash",
+     "part": "boot",
+     "slot": "both",
+     "file": "stock:boot.img"
+    },
+    {
+     "do": "flash",
+     "part": "system",
+     "slot": "both",
+     "file": "stock:system.img"
+    },
+    {
+     "do": "flash",
+     "part": "vendor",
+     "slot": "both",
+     "file": "stock:vendor.img"
+    },
+    {
+     "do": "flash",
+     "part": "userdata",
+     "slot": "none",
+     "file": "stock:userdata.img"
+    },
+    {
+     "do": "flash",
+     "part": "mdtp",
+     "slot": "both",
+     "file": "stock:mdtp.img"
+    },
+    {
+     "do": "flash",
+     "part": "splash",
+     "slot": "none",
+     "file": "stock:splash.img"
+    },
+    {
+     "do": "flash",
+     "part": "mdtpsecapp",
+     "slot": "both",
+     "file": "stock:mdtpsecapp.img"
+    },
+    {
+     "do": "flash",
+     "part": "storsec",
+     "slot": "none",
+     "file": "stock:storsec.mbn"
+    },
+    {
+     "do": "erase",
+     "part": "ddr"
+    },
+    {
+     "do": "setActive",
+     "slot": "a"
+    },
+    {
+     "do": "reboot"
+    },
+    {
+     "do": "done",
+     "text": "Stock Android 10 is installed. Let it boot and finish setup before you think about locking."
+    }
+   ],
+   "enabled": false,
+   "disabledText": "Being tested on a real Mi A2. This flow opens once it has passed end to end; until then use the command-line steps on the release page."
+  },
+  "lock": {
+   "title": "Lock the bootloader",
+   "summary": "Only on unmodified stock firmware. Erases everything.",
+   "enabled": false,
+   "disabledText": "Locking is not offered yet: it has not been tested end to end on a Mi A2 with these steps. Locking a phone that does not run untouched stock firmware can make it unbootable.",
+   "before": [
+    "Only after Back to stock has finished and stock Android has booted through setup.",
+    "Keep OEM unlocking turned on in Developer options until the locked phone has booted once."
+   ],
+   "files": [],
+   "steps": [
+    {
+     "do": "check",
+     "var": "product",
+     "in": [
+      "jasmine"
+     ],
+     "fail": "This is not a Mi A2."
+    },
+    {
+     "do": "confirm",
+     "text": "I flashed stock V11.0.28 with this tool and it booted to the setup screen."
+    },
+    {
+     "do": "command",
+     "cmd": "flashing lock",
+     "phone": "On the phone: select LOCK with the volume keys, then press Power. The phone erases itself."
+    },
+    {
+     "do": "done",
+     "text": "Locked. If it does not boot, unlock again from FASTBOOT and flash stock once more."
+    }
+   ]
+  }
+ }
+}

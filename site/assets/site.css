@@ -176,6 +176,28 @@ a.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color
 .steps p{margin:0}
 .guides{margin:4px 0 0}
 
+/* web installer */
+.inst-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;margin:16px 0;box-shadow:var(--shadow-sm)}
+.inst-card h3{margin:0 0 8px;font-size:18px}
+.inst-card summary{font-weight:700;cursor:pointer}
+.inst-opt{display:flex;gap:12px;align-items:flex-start;margin:12px 0;cursor:pointer}
+.inst-opt input{margin-top:5px;width:18px;height:18px;accent-color:var(--accent)}
+.inst-alert{border:1px solid var(--accent-border);background:var(--accent-soft);border-radius:var(--radius-sm);padding:14px 18px;margin:12px 0}
+.inst-alert.bad{border-color:#fca5a5;background:#fef2f2;color:#7f1d1d}
+.inst-alert.phone{border-color:#fcd34d;background:#fffbeb;color:#78350f;font-weight:600}
+.inst-alert.ok{font-weight:700}
+@media (prefers-color-scheme:dark){.inst-alert.bad{background:#2a1212;color:#fecaca;border-color:#7f1d1d}.inst-alert.phone{background:#2a210c;color:#fde68a;border-color:#78350f}}
+.inst-alert p{margin:0 0 8px}
+.inst-log{max-height:320px;overflow:auto;background:var(--dark);color:#d5e3e0;font:12.5px/1.5 var(--mono);padding:14px;border-radius:var(--radius-sm);white-space:pre-wrap}
+.inst-log .ok{color:#5eead4}.inst-log .bad{color:#fca5a5}.inst-log .dim{color:#7c8e8b}
+.inst-progress{position:relative;height:30px;border-radius:var(--pill);background:var(--bg-sunken);overflow:hidden;margin-top:14px}
+.inst-progress .bar{position:absolute;inset:0 auto 0 0;background:var(--accent);transition:width .2s}
+.inst-progress .label{position:relative;display:block;text-align:center;font:600 13px/30px var(--sans);color:var(--ink)}
+td.ok{color:var(--ok);font-weight:700}td.bad{color:var(--bad);font-weight:700}
+button{font-family:inherit}
+button[disabled]{opacity:.45;cursor:not-allowed;transform:none!important}
+label.btn input{display:none}
+
 /* footer */
 .footer{border-top:1px solid var(--line);background:var(--bg-muted);padding:48px 0;margin-top:40px}
 .footer-in{display:grid;gap:32px;grid-template-columns:1fr}

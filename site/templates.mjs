@@ -239,7 +239,8 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
     const { BASE, devices } = ctx;
     return layout(ctx, { title: 'Install', route: 'install/', description: 'How to install my Android builds: unlock the bootloader, flash the ROM, update, or go back to stock.', body: `
 <section class="page-hero"><div class="shell">${crumbs(ctx, [['Home', ''], ['Install', 'install/']])}
-  <h1>Install</h1><p class="lead">Unlock, flash, update or go back to stock. Pick your phone for its exact steps: every phone is different, and the release page always has the steps for that build.</p></div></section>
+  <h1>Install</h1><p class="lead">Unlock, flash, update or go back to stock. Pick your phone for its exact steps: every phone is different, and the release page always has the steps for that build.</p>
+  <div class="actions"><a class="btn btn-accent" href="${BASE}install/web/">Open the web installer</a></div></div></section>
 <section class="section tight"><div class="shell">
   <ol class="steps">
     <li><h3>Back up</h3><p class="muted">Unlocking the bootloader and a clean install erase everything on the phone.</p></li>
@@ -250,6 +251,29 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
   <div class="section-head" style="margin-top:48px"><span class="eyebrow">Guides per device</span><h2>Your phone</h2></div>
   <div class="grid">${devices.map((d) => `<div class="card"><span class="mono tag">${esc(d.codename)}</span><h3>${esc(d.name)}</h3>
     <div class="actions">${d.latest ? `<a class="btn btn-accent btn-sm" href="${BASE}${d.latest.route}#flashing-instructions-new-install">Install the latest</a>` : ''}${d.guides.slice(0, 3).map((g) => `<a class="btn btn-ghost btn-sm" href="${BASE}${g.route}">${esc(g.title)}</a>`).join('')}</div></div>`).join('')}</div>
+</div></section>` });
+  },
+
+  webInstall(ctx) {
+    const { BASE, installers } = ctx;
+    const list = installers.map((d) => ({ codename: d.codename, name: d.name, url: `${BASE}installer/${d.codename}.json` }));
+    return layout(ctx, { title: 'Web installer', route: 'install/web/', description: 'Unlock, install LineageOS or go back to stock from your browser over USB.', body: `
+<section class="page-hero"><div class="shell">${crumbs(ctx, [['Home', ''], ['Install', 'install/'], ['Web installer', 'install/web/']])}
+  <span class="badge">Beta</span>
+  <h1>Web installer</h1><p class="lead">Unlock the bootloader, install LineageOS or go back to stock, right from Chrome or Edge on a computer. No adb or fastboot install needed.</p></div></section>
+<section class="section tight"><div class="shell narrow">
+  <details class="inst-card"><summary>What you need</summary>
+    <ul>
+      <li>A computer with Chrome, Edge, Brave or Opera (Firefox and Safari cannot use USB). Not a Snap or Flatpak browser on Linux.</li>
+      <li>Windows: the <a href="https://developer.android.com/studio/run/win-usb" rel="noopener">Google USB driver</a> for the phone in FASTBOOT mode.</li>
+      <li>Linux: Android udev rules (package <code>android-udev-rules</code>), and stop <code>adb</code> first: <code>adb kill-server</code>.</li>
+      <li>A good USB cable, plugged straight into the computer. Close other tools that use the phone.</li>
+      <li>The files for your flow, downloaded from the release page (browsers cannot download GitHub release files for you). Every file is checked against its SHA-256 before anything is flashed.</li>
+    </ul></details>
+  <div id="installer" data-base="${BASE}"><noscript>The web installer needs JavaScript.</noscript></div>
+  <script type="application/json" id="installer-devices">${JSON.stringify(list).replace(/</g, '\\u003c')}</script>
+  <script type="module" src="${BASE}assets/installer.js"></script>
+  <p class="muted">Prefer the command line? Every release page has the same steps for adb and fastboot.</p>
 </div></section>` });
   },
 

@@ -8,7 +8,16 @@
     "serve": "node build.mjs && npx --yes http-server ../_site -p 8080 -c-1"
   },
   "dependencies": {
-    "marked": "15.0.12",
-    "js-yaml": "4.1.0"
+    "@lineageos-infra/android-fastboot": "1.1.6",
+    "@yume-chan/adb": "2.6.4",
+    "@yume-chan/adb-credential-web": "2.1.0",
+    "@yume-chan/adb-daemon-webusb": "2.3.2",
+    "esbuild": "0.28.2",
+    "hash-wasm": "4.13.0",
+    "js-yaml": "4.1.0",
+    "marked": "15.0.12"
+  },
+  "devDependencies": {
+    "usb": "3.2.1"
   }
 }

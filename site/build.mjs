@@ -1,5 +1,5 @@
 // Builds the GitHub Pages site from the Markdown in DEVICES/ (the Markdown stays the source of truth).
-//   node site/build.mjs            -> ../_site (base path /AOSP/)
+//   node site/build.mjs            -> ../_site (base path /)
 //   SITE_BASE=/ node site/build.mjs (custom domain or local root)
 // Layout it understands (device-agnostic):
 //   DEVICES/<brand>/<codename>/README.md                  device page (optional YAML front matter: name, soc, status, image, summary)
@@ -13,11 +13,12 @@ import { Marked } from 'marked';
 import yaml from 'js-yaml';
 import { page, esc } from './templates.mjs';
 import { writeFeeds } from './ota.mjs';
+import * as esbuild from 'esbuild';
 
 const SITE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(SITE, '..');
 const OUT = path.resolve(process.env.SITE_OUT || path.join(ROOT, '_site'));
-const BASE = (process.env.SITE_BASE || '/AOSP/').replace(/\/?$/, '/');
+const BASE = (process.env.SITE_BASE || '/').replace(/\/?$/, '/');
 const REPO = 'https://github.com/iamimmanuelraj/AOSP';
 
 // ---------- helpers ----------
@@ -201,10 +202,20 @@ write('updates/', page.updates(ctx));
 write('404.html', page.notFound(ctx));
 
 // sitemap for search engines
-const SITE_URL = process.env.SITE_URL || 'https://immanuelraj.dev/AOSP/';
-const routes = ['', 'devices/', 'releases/', 'support/', 'install/', 'updates/', ...mdFiles.map((f) => routeByFile.get(path.resolve(f)))];
+const SITE_URL = process.env.SITE_URL || 'https://aosp.immanuelraj.dev/';
+const routes = ['', 'devices/', 'releases/', 'support/', 'install/', 'install/web/', 'updates/', ...mdFiles.map((f) => routeByFile.get(path.resolve(f)))];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...new Set(routes)].map((r) => `  <url><loc>${esc(SITE_URL + r)}</loc></url>`).join('\n')}\n</urlset>\n`);
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}sitemap.xml\n`);
 fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
+// web installer: one JSON per device that has DEVICES/<brand>/<codename>/installer.json, plus the bundled engine
+const installers = devices.filter((d) => fs.existsSync(path.join(path.dirname(d.file), 'installer.json')));
+for (const d of installers) {
+  const cfg = JSON.parse(read(path.join(path.dirname(d.file), 'installer.json')));
+  fs.mkdirSync(path.join(OUT, 'installer'), { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'installer', `${d.codename}.json`), JSON.stringify(cfg));
+}
+await esbuild.build({ entryPoints: [path.join(SITE, 'installer/main.js')], bundle: true, format: 'esm', minify: true, target: 'chrome110',
+  outfile: path.join(OUT, 'assets/installer.js'), legalComments: 'linked', logLevel: 'warning' });
+write('install/web/', page.webInstall({ ...ctx, installers }));
 const feeds = writeFeeds(devices, OUT); // LineageOS Updater feeds: ota/<codename>/<os>-<major>/<type>-<variant>.json
 console.log(`built ${mdFiles.length} Markdown pages, ${devices.length} devices, ${allReleases.length} releases, ${feeds.length} OTA feeds -> ${path.relative(process.cwd(), OUT) || OUT}`);
