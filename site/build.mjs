@@ -12,6 +12,7 @@ import { fileURLToPath } from 'node:url';
 import { Marked } from 'marked';
 import yaml from 'js-yaml';
 import { page, esc } from './templates.mjs';
+import { writeFeeds } from './ota.mjs';
 
 const SITE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(SITE, '..');
@@ -205,4 +206,5 @@ const routes = ['', 'devices/', 'releases/', 'support/', 'install/', 'updates/',
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...new Set(routes)].map((r) => `  <url><loc>${esc(SITE_URL + r)}</loc></url>`).join('\n')}\n</urlset>\n`);
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}sitemap.xml\n`);
 fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
-console.log(`built ${mdFiles.length} Markdown pages, ${devices.length} devices, ${allReleases.length} releases -> ${path.relative(process.cwd(), OUT) || OUT}`);
+const feeds = writeFeeds(devices, OUT); // LineageOS Updater feeds: ota/<codename>/<os>-<major>/<type>-<variant>.json
+console.log(`built ${mdFiles.length} Markdown pages, ${devices.length} devices, ${allReleases.length} releases, ${feeds.length} OTA feeds -> ${path.relative(process.cwd(), OUT) || OUT}`);
