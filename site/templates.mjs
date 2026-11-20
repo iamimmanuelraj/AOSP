@@ -4,8 +4,38 @@ export const esc = (s = '') => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&am
 const androidOf = (title = '') => (title.match(/Android\s+(\d+(?:\.\d+)?)/) || [])[1] || '';
 const romLabel = (r) => `${r.os} ${r.version}`;
 
+const ICONS = {
+  system: '<svg class="ti ti-system" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
+  light: '<svg class="ti ti-light" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+  dark: '<svg class="ti ti-dark" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
+  pause: '<svg class="tk-i-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>',
+  play: '<svg class="tk-i-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
+};
+
+// Runs before first paint: applies the saved theme so there is no flash. No saved choice = follow the system.
+const THEME_BOOT = `try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}`;
+
+// News items for the ticker, all generated from data (newest releases first, then standing news).
+function newsItems(ctx) {
+  const { allReleases, fmtDate } = ctx;
+  const items = allReleases.slice(0, 4).map((r, i) => ({ href: r.route, tag: i === 0 ? 'New' : 'Build', text: `${romLabel(r)} for ${r.device.name} · ${fmtDate(r.date)}` }));
+  items.push({ href: 'install/web/', tag: 'Beta', text: 'Web installer (beta): unlock and flash from your browser' });
+  items.push({ href: 'updates/', tag: 'Soon', text: 'OTA updates via the LineageOS Updater are coming' });
+  return items;
+}
+
+function ticker(ctx) {
+  const { BASE } = ctx;
+  const items = newsItems(ctx);
+  const group = (hidden) => `<ul class="tk-group"${hidden ? ' aria-hidden="true"' : ''}>${items.map((n) => `<li><a href="${BASE}${n.href}"${hidden ? ' tabindex="-1"' : ''}><span class="tk-tag">${esc(n.tag)}</span>${esc(n.text)}</a></li>`).join('')}</ul>`;
+  return `<div class="ticker" role="region" aria-label="Latest news" style="--tk-dur:${items.length * 7}s" data-ticker>
+  <div class="tk-label"><span>News</span><button class="tk-toggle" type="button" aria-pressed="false" aria-label="Pause the news ticker" data-ticker-toggle>${ICONS.pause}${ICONS.play}</button></div>
+  <div class="tk-view"><div class="tk-track">${group(false)}${group(true)}</div></div>
+</div>`;
+}
+
 function layout(ctx, { title, description, body, route = '', ogImage }) {
-  const { BASE, REPO, allReleases, fmtDate } = ctx;
+  const { BASE, REPO, allReleases } = ctx;
   const latest = allReleases[0];
   const nav = [
     ['Devices', 'devices/'], ['Releases', 'releases/'], ['Install', 'install/'], ['Updates', 'updates/'], ['Support', 'support/'],
@@ -23,43 +53,53 @@ function layout(ctx, { title, description, body, route = '', ogImage }) {
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:type" content="website">
 <meta property="og:image" content="${esc(ogImage || `${BASE}assets/banner-android-builds.png`)}">
-<meta name="theme-color" content="#0f766e">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06161c" media="(prefers-color-scheme: dark)">
+<script>${THEME_BOOT}</script>
 <link rel="icon" href="${BASE}assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400..700&family=Google+Sans+Code:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${BASE}assets/site.css">
 <script defer src="${BASE}assets/site.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
-${latest ? `<div class="strip"><a href="${BASE}${latest.route}">New: ${esc(romLabel(latest))} for ${esc(latest.device.name)} · ${fmtDate(latest.date)} <span aria-hidden="true">→</span></a></div>` : ''}
 <header class="header" data-header>
   <div class="shell header-in">
     <a class="logo" href="${BASE}" aria-label="Android Builds home">
-      <img src="${BASE}assets/favicon.svg" alt="" width="30" height="30"><span>Android<b>Builds</b></span>
+      <img src="${BASE}assets/favicon.svg" alt="" width="32" height="32"><span>Android<b>Builds</b></span>
     </a>
-    <nav class="nav" id="nav" aria-label="Main">
+    <nav class="nav" id="nav" aria-label="Main" data-nav>
+      <span class="nav-pill" aria-hidden="true" data-nav-pill></span>
       ${nav.map(([t, r]) => `<a href="${BASE}${r}"${route.startsWith(r) ? ' aria-current="page"' : ''}>${t}</a>`).join('')}
       <a class="nav-gh" href="${REPO}" rel="noopener">GitHub</a>
     </nav>
-    ${latest ? `<a class="btn btn-dark btn-sm cta" href="${BASE}${latest.route}">Get the latest</a>` : ''}
+    <button class="theme-btn" type="button" aria-label="Theme: system. Switch to light." title="Theme: system" data-theme-toggle>${ICONS.system}${ICONS.light}${ICONS.dark}</button>
+    ${latest ? `<a class="btn btn-accent btn-sm cta" href="${BASE}${latest.route}">Get the latest</a>` : ''}
     <button class="menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menu" data-menu><span></span><span></span><span></span></button>
   </div>
 </header>
+${latest ? ticker(ctx) : ''}
+<p class="sr-only" role="status" aria-live="polite" data-theme-status></p>
 <main id="main">
 ${body}
 </main>
 <footer class="footer">
   <div class="shell footer-in">
-    <div>
-      <a class="logo" href="${BASE}"><img src="${BASE}assets/favicon.svg" alt="" width="26" height="26"><span>Android<b>Builds</b></span></a>
-      <p class="muted">Unofficial builds made in my free time. No warranty: flashing can erase or brick your phone. Not affiliated with Google, LineageOS or any phone maker.</p>
+    <div class="footer-brand">
+      <a class="logo" href="${BASE}"><img src="${BASE}assets/favicon.svg" alt="" width="28" height="28"><span>Android<b>Builds</b></span></a>
+      <p>Unofficial builds made in my free time. No warranty: flashing can erase or brick your phone. Not affiliated with Google, LineageOS or any phone maker.</p>
     </div>
-    <div class="footer-links">
-      <a href="${BASE}devices/">Devices</a><a href="${BASE}releases/">Releases</a><a href="${BASE}install/">Install</a>
-      <a href="${BASE}updates/">Updates</a><a href="${REPO}/issues" rel="noopener">Report an issue</a><a href="${REPO}" rel="noopener">Source of this site</a>
-    </div>
+    <nav class="footer-col" aria-label="Site">
+      <h2>Site</h2>
+      <a href="${BASE}devices/">Devices</a><a href="${BASE}releases/">Releases</a><a href="${BASE}install/">Install</a><a href="${BASE}updates/">Updates</a>
+    </nav>
+    <nav class="footer-col" aria-label="Project">
+      <h2>Project</h2>
+      <a href="${BASE}support/">Support</a><a href="${REPO}/issues" rel="noopener">Report an issue</a><a href="${REPO}" rel="noopener">Source of this site</a>
+    </nav>
   </div>
 </footer>
 </body>
@@ -91,11 +131,23 @@ function releaseRow(ctx, r, showDevice = true) {
     </a></li>`;
 }
 
-const crumbs = (ctx, items) => `<nav class="crumbs" aria-label="Breadcrumb">${items.map(([t, r], i) => i === items.length - 1
-  ? `<span aria-current="page">${esc(t)}</span>` : `<a href="${ctx.BASE}${r}">${esc(t)}</a>`).join('<span aria-hidden="true">/</span>')}</nav>`;
+const crumbs = (ctx, items) => `<nav class="crumbs" aria-label="Breadcrumb"><ol>${items.map(([t, r], i) => i === items.length - 1
+  ? `<li><span aria-current="page">${esc(t)}</span></li>` : `<li><a href="${ctx.BASE}${r}">${esc(t)}</a></li>`).join('')}</ol></nav>`;
 
 const article = (ctx, html, source) => `<article class="prose">${html}</article>
   <p class="edit"><a href="${esc(source)}" rel="noopener">View or edit this page on GitHub</a></p>`;
+
+// inner-page header; `narrow` pages share the reading column with their content so the left edge lines up
+const hero = (ctx, trail, inner, { narrow = true, cls = '' } = {}) => `<section class="page-hero ${cls}"><div class="shell${narrow ? ' narrow' : ''}">${trail ? crumbs(ctx, trail) : ''}${inner}</div></section>`;
+
+const FEATURE_ICONS = {
+  shield: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 7.9-8 9-4.8-1.1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
+  notes: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>',
+  update: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M20 4v5h-5"/></svg>',
+};
+
+// install-steps anchor per release route, filled while release pages render (they render before the install page)
+const stepsAnchor = new Map();
 
 export const page = {
   home(ctx) {
@@ -103,20 +155,28 @@ export const page = {
     const latest = allReleases[0];
     return layout(ctx, { route: '', body: `
 <section class="hero">
-  <div class="shell">
-    <span class="badge">Custom ROMs · kernels · recoveries</span>
-    <h1>Keep your phone<br><span class="accent">fast, current and yours.</span></h1>
-    <p class="lead">Signed Android builds with clear release notes, honest known issues and step-by-step install guides. Free, unofficial and made with care.</p>
-    <div class="actions">
-      ${latest ? `<a class="btn btn-accent" href="${BASE}${latest.route}">Download ${esc(romLabel(latest))}</a>` : ''}
-      <a class="btn btn-ghost" href="${BASE}devices/">Browse devices</a>
+  <div class="shell hero-grid">
+    <div class="hero-copy">
+      <span class="badge">Custom ROMs · kernels · recoveries</span>
+      <h1>Keep your phone <span class="accent">fast, current and yours.</span></h1>
+      <p class="lead">Signed Android builds with clear release notes, honest known issues and step-by-step install guides. Free, unofficial and made with care.</p>
+      <div class="actions">
+        ${latest ? `<a class="btn btn-accent" href="${BASE}${latest.route}">Download ${esc(romLabel(latest))}</a>` : ''}
+        <a class="btn btn-ghost" href="${BASE}devices/">Browse devices</a>
+      </div>
     </div>
-    ${latest ? `<div class="stats">
-      <div><span class="k">Latest build</span><span class="v">${fmtDate(latest.date)}</span></div>
-      <div><span class="k">Android</span><span class="v">${esc(androidOf(latest.title) || '-')}</span></div>
-      <div><span class="k">Devices</span><span class="v">${devices.length}</span></div>
-      <div><span class="k">Releases</span><span class="v">${allReleases.length}</span></div>
-    </div>` : ''}
+    ${latest ? `<aside class="hero-card" aria-label="Latest build">
+      <span class="eyebrow">Latest build</span>
+      <h2>${esc(romLabel(latest))}</h2>
+      <p class="muted">for ${esc(latest.device.name)}</p>
+      <dl class="facts">
+        <div><dt>Android</dt><dd>${esc(androidOf(latest.title) || '-')}</dd></div>
+        <div><dt>Build date</dt><dd>${fmtDate(latest.date)}</dd></div>
+        <div><dt>Devices</dt><dd>${devices.length}</dd></div>
+        <div><dt>Releases</dt><dd>${allReleases.length}</dd></div>
+      </dl>
+      <a class="btn btn-ghost btn-block" href="${BASE}${latest.route}">Release notes <span aria-hidden="true">→</span></a>
+    </aside>` : ''}
   </div>
 </section>
 <section class="section">
@@ -129,23 +189,26 @@ export const page = {
   <div class="shell">
     <div class="section-head"><span class="eyebrow">Why these builds</span><h2>Built to be lived with</h2></div>
     <div class="grid grid-3">
-      <div class="card feature"><h3>Signed and verified</h3><p class="muted">User builds signed with my own release keys, SELinux enforcing and verified boot on the system partitions. Every file ships with a SHA-256 checksum.</p></div>
-      <div class="card feature"><h3>Honest release notes</h3><p class="muted">What changed, what is fixed and what still does not work, written for each build. Nothing hidden in a Telegram post.</p></div>
-      <div class="card feature"><h3>Easy updates</h3><p class="muted">Same keys between builds, so updates install over the top without losing data. Clean-flash builds are marked clearly.</p></div>
+      <div class="card feature"><span class="icon-badge">${FEATURE_ICONS.shield}</span><h3>Signed and verified</h3><p class="muted">User builds signed with my own release keys, SELinux enforcing and verified boot on the system partitions. Every file ships with a SHA-256 checksum.</p></div>
+      <div class="card feature"><span class="icon-badge">${FEATURE_ICONS.notes}</span><h3>Honest release notes</h3><p class="muted">What changed, what is fixed and what still does not work, written for each build. Nothing hidden in a Telegram post.</p></div>
+      <div class="card feature"><span class="icon-badge">${FEATURE_ICONS.update}</span><h3>Easy updates</h3><p class="muted">Same keys between builds, so updates install over the top without losing data. Clean-flash builds are marked clearly.</p></div>
     </div>
   </div>
 </section>
 <section class="section">
-  <div class="shell narrow">
-    <div class="section-head"><span class="eyebrow">Releases</span><h2>Latest builds</h2></div>
+  <div class="shell split">
+    <div>
+      <div class="section-head"><span class="eyebrow">Releases</span><h2>Latest builds</h2></div>
+      <p class="muted">Newest first. Each release page has the notes, checksums and install steps.</p>
+      <p><a class="btn btn-ghost" href="${BASE}releases/">All releases</a></p>
+    </div>
     <ul class="release-list">${allReleases.slice(0, 6).map((r) => releaseRow(ctx, r)).join('')}</ul>
-    <p><a class="btn btn-ghost" href="${BASE}releases/">All releases</a></p>
   </div>
 </section>
-<section class="section section-dark">
-  <div class="shell narrow center">
-    <h2>Found a bug? Missing a device?</h2>
-    <p class="lead">Support happens in the open on GitHub Issues: logs, fixes and answers stay searchable for everyone.</p>
+<section class="section-band">
+  <div class="shell band-in">
+    <div><h2>Found a bug? Missing a device?</h2>
+    <p>Support happens in the open on GitHub Issues: logs, fixes and answers stay searchable for everyone.</p></div>
     <a class="btn btn-accent" href="${ctx.REPO}/issues" rel="noopener">Open an issue</a>
   </div>
 </section>` });
@@ -153,15 +216,13 @@ export const page = {
 
   devices(ctx) {
     return layout(ctx, { title: 'Devices', route: 'devices/', body: `
-<section class="page-hero"><div class="shell">${crumbs(ctx, [['Home', ''], ['Devices', 'devices/']])}
-  <h1>Devices</h1><p class="lead">Every phone I build for. Pick yours for ROMs, kernels, recoveries and guides.</p></div></section>
+${hero(ctx, [['Home', ''], ['Devices', 'devices/']], '<h1>Devices</h1><p class="lead">Every phone I build for. Pick yours for ROMs, kernels, recoveries and guides.</p>', { narrow: false })}
 <section class="section tight"><div class="shell"><div class="grid">${ctx.devices.map((d) => deviceCard(ctx, d)).join('')}</div></div></section>` });
   },
 
   releases(ctx) {
     return layout(ctx, { title: 'Releases', route: 'releases/', body: `
-<section class="page-hero"><div class="shell">${crumbs(ctx, [['Home', ''], ['Releases', 'releases/']])}
-  <h1>Releases</h1><p class="lead">Every build, newest first. Downloads are on GitHub Releases; each page has the notes, checksums and install steps.</p></div></section>
+${hero(ctx, [['Home', ''], ['Releases', 'releases/']], '<h1>Releases</h1><p class="lead">Every build, newest first. Downloads are on GitHub Releases; each page has the notes, checksums and install steps.</p>')}
 <section class="section tight"><div class="shell narrow">
   <div class="filters" role="group" aria-label="Filter by device"><button class="chip-btn" aria-pressed="true" data-filter="">All</button>${ctx.devices.filter((d) => d.latest).map((d) => `<button class="chip-btn" aria-pressed="false" data-filter="${esc(d.codename)}">${esc(d.name)}</button>`).join('')}</div>
   <ul class="release-list" data-filterable>${ctx.allReleases.map((r) => releaseRow(ctx, r).replace('<li class="release-row">', `<li class="release-row" data-device="${esc(r.device.codename)}">`)).join('')}</ul>
@@ -173,16 +234,15 @@ export const page = {
     const l = d.latest;
     const ours = d.roms.filter((r) => r.releases.length);
     return layout(ctx, { title: d.name, description: `${d.name} (${d.codename}): ${d.summary}`, route: d.route, body: `
-<section class="page-hero"><div class="shell">${crumbs(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route]])}
+${hero(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route]], `
   <span class="mono tag">${esc(d.codename)}</span>
   <h1>${esc(d.name)}</h1><p class="lead">${esc(d.summary)}</p>
-  ${d.guides.length ? `<div class="actions guides">${d.guides.map((g) => `<a class="btn btn-ghost btn-sm" href="${BASE}${g.route}">${esc(g.title)}</a>`).join('')}</div>` : ''}
+  ${d.guides.length ? `<div class="guides"><span class="k">Guides</span><div class="actions">${d.guides.map((g) => `<a class="btn btn-ghost btn-sm" href="${BASE}${g.route}">${esc(g.title)}</a>`).join('')}</div></div>` : ''}
   ${l ? `<div class="latest card">
     <div><span class="eyebrow">Latest build</span><h3>${esc(romLabel(l))}</h3>
     <div class="kvs">${label('Android', androidOf(l.title))}${label('Date', fmtDate(l.date))}${label('Release', l.tag)}</div></div>
     <div class="actions"><a class="btn btn-accent" href="${BASE}${l.route}">Release notes & download</a></div>
-  </div>` : ''}
-</div></section>
+  </div>` : ''}`)}
 ${ours.length ? `<section class="section tight"><div class="shell narrow">
   <div class="section-head"><span class="eyebrow">My builds</span><h2>Releases for ${esc(d.name)}</h2></div>
   <ul class="release-list">${ours.flatMap((r) => r.releases).sort((a, b) => b.date.localeCompare(a.date)).map((r) => releaseRow(ctx, { ...r, device: d }, false)).join('')}</ul>
@@ -193,8 +253,7 @@ ${ours.length ? `<section class="section tight"><div class="shell narrow">
   rom(ctx) {
     const { device: d, rom, html, source, title } = ctx;
     return layout(ctx, { title: `${title}`, route: rom.route, body: `
-<section class="page-hero"><div class="shell">${crumbs(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route], [rom.os, rom.route]])}
-  <span class="mono tag">${esc(d.codename)}</span><h1>${esc(title)}</h1></div></section>
+${hero(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route], [rom.os, rom.route]], `<span class="mono tag">${esc(d.codename)}</span><h1>${esc(title)}</h1>`)}
 ${rom.releases.length ? `<section class="section tight"><div class="shell narrow"><ul class="release-list">${rom.releases.map((r) => releaseRow(ctx, { ...r, device: d }, false)).join('')}</ul></div></section>` : ''}
 <section class="section tight"><div class="shell narrow">${article(ctx, html, source)}</div></section>` });
   },
@@ -204,10 +263,14 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
     const list = d.roms.find((x) => x.os === r.os).releases;
     const i = list.findIndex((x) => x.file === r.file);
     const newer = list[i - 1]; const older = list[i + 1];
+    // the install steps heading differs per release: link to the first heading that is about flashing
+    const steps = (html.match(/id="(flashing-instructions[^"]*)"/) || html.match(/id="([^"]*flash[^"]*)"/) || [])[1];
+    stepsAnchor.set(r.route, steps);
     return layout(ctx, { title: r.title, description: `${r.title}: release notes, downloads, checksums and install steps.`, route: r.route,
       ogImage: r.banner ? BASE + r.banner : undefined, body: `
-<section class="page-hero release-hero"><div class="shell">${crumbs(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route], [r.os, `${r.route.split('/').slice(0, -3).join('/')}/`], [fmtDate(r.date), r.route]])}
-  <h1>${esc(r.title)}</h1>
+${hero(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route], [r.os, `${r.route.split('/').slice(0, -3).join('/')}/`], [fmtDate(r.date), r.route]], `
+  <span class="mono tag">${esc(d.codename)}</span>
+  <h1>${esc(romLabel(r))} <span class="h1-sub">for ${esc(d.name)}</span></h1>
   <div class="stats">
     <div><span class="k">ROM</span><span class="v">${esc(romLabel(r))}</span></div>
     <div><span class="k">Android</span><span class="v">${esc(androidOf(r.title) || '-')}</span></div>
@@ -216,12 +279,11 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
   </div>
   <div class="actions">
     ${r.tag ? `<a class="btn btn-accent" href="${REPO}/releases/tag/${esc(r.tag)}" rel="noopener">All files on GitHub</a>` : ''}
-    <a class="btn btn-ghost" href="#flashing-instructions-new-install">Install steps</a>
+    ${steps ? `<a class="btn btn-ghost" href="#${esc(steps)}">Install steps</a>` : ''}
   </div>
-  ${r.banner ? `<img class="banner" src="${BASE}${r.banner}" alt="${esc(r.title)}" loading="lazy">` : ''}
-</div></section>
+  ${r.banner ? `<img class="banner" src="${BASE}${r.banner}" alt="${esc(r.title)}" width="1280" height="720" loading="lazy">` : ''}`, { cls: 'release-hero' })}
 <section class="section tight"><div class="shell narrow">${article(ctx, html, source)}
-  <nav class="pager">${newer ? `<a class="card" href="${BASE}${newer.route}"><span class="eyebrow">Newer</span>${esc(fmtDate(newer.date))}</a>` : '<span></span>'}${older ? `<a class="card right" href="${BASE}${older.route}"><span class="eyebrow">Older</span>${esc(fmtDate(older.date))}</a>` : ''}</nav>
+  <nav class="pager" aria-label="Other releases">${newer ? `<a class="card" href="${BASE}${newer.route}"><span class="eyebrow">Newer</span>${esc(fmtDate(newer.date))}</a>` : '<span></span>'}${older ? `<a class="card right" href="${BASE}${older.route}"><span class="eyebrow">Older</span>${esc(fmtDate(older.date))}</a>` : ''}</nav>
 </div></section>` });
   },
 
@@ -231,16 +293,15 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
     if (d) trail.push(['Devices', 'devices/'], [d.name, d.route]);
     trail.push([title, route]);
     return layout(ctx, { title, route, body: `
-<section class="page-hero"><div class="shell">${crumbs(ctx, trail)}<h1>${esc(title)}</h1></div></section>
+${hero(ctx, trail, `<h1>${esc(title)}</h1>`)}
 <section class="section tight"><div class="shell narrow">${article(ctx, html, source)}</div></section>` });
   },
 
   install(ctx) {
     const { BASE, devices } = ctx;
     return layout(ctx, { title: 'Install', route: 'install/', description: 'How to install my Android builds: unlock the bootloader, flash the ROM, update, or go back to stock.', body: `
-<section class="page-hero"><div class="shell">${crumbs(ctx, [['Home', ''], ['Install', 'install/']])}
-  <h1>Install</h1><p class="lead">Unlock, flash, update or go back to stock. Pick your phone for its exact steps: every phone is different, and the release page always has the steps for that build.</p>
-  <div class="actions"><a class="btn btn-accent" href="${BASE}install/web/">Open the web installer</a></div></div></section>
+${hero(ctx, [['Home', ''], ['Install', 'install/']], `<h1>Install</h1><p class="lead">Unlock, flash, update or go back to stock. Pick your phone for its exact steps: every phone is different, and the release page always has the steps for that build.</p>
+  <div class="actions"><a class="btn btn-accent" href="${BASE}install/web/">Open the web installer</a></div>`, { narrow: false })}
 <section class="section tight"><div class="shell">
   <ol class="steps">
     <li><h3>Back up</h3><p class="muted">Unlocking the bootloader and a clean install erase everything on the phone.</p></li>
@@ -248,9 +309,11 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
     <li><h3>Read your device page</h3><p class="muted">Standing instructions, known issues and the flashing guide for your phone.</p></li>
     <li><h3>Follow the release page</h3><p class="muted">Each release lists its files, checksums and the exact install or update steps.</p></li>
   </ol>
-  <div class="section-head" style="margin-top:48px"><span class="eyebrow">Guides per device</span><h2>Your phone</h2></div>
+</div></section>
+<section class="section tight"><div class="shell">
+  <div class="section-head"><span class="eyebrow">Guides per device</span><h2>Your phone</h2></div>
   <div class="grid">${devices.map((d) => `<div class="card"><span class="mono tag">${esc(d.codename)}</span><h3>${esc(d.name)}</h3>
-    <div class="actions">${d.latest ? `<a class="btn btn-accent btn-sm" href="${BASE}${d.latest.route}#flashing-instructions-new-install">Install the latest</a>` : ''}${d.guides.slice(0, 3).map((g) => `<a class="btn btn-ghost btn-sm" href="${BASE}${g.route}">${esc(g.title)}</a>`).join('')}</div></div>`).join('')}</div>
+    <div class="actions">${d.latest ? `<a class="btn btn-accent btn-sm" href="${BASE}${d.latest.route}${stepsAnchor.get(d.latest.route) ? `#${stepsAnchor.get(d.latest.route)}` : ''}">Install the latest</a>` : ''}${d.guides.slice(0, 3).map((g) => `<a class="btn btn-ghost btn-sm" href="${BASE}${g.route}">${esc(g.title)}</a>`).join('')}</div></div>`).join('')}</div>
 </div></section>` });
   },
 
@@ -258,9 +321,9 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
     const { BASE, installers } = ctx;
     const list = installers.map((d) => ({ codename: d.codename, name: d.name, url: `${BASE}installer/${d.codename}.json` }));
     return layout(ctx, { title: 'Web installer', route: 'install/web/', description: 'Unlock, install LineageOS or go back to stock from your browser over USB.', body: `
-<section class="page-hero"><div class="shell">${crumbs(ctx, [['Home', ''], ['Install', 'install/'], ['Web installer', 'install/web/']])}
+${hero(ctx, [['Home', ''], ['Install', 'install/'], ['Web installer', 'install/web/']], `
   <span class="badge">Beta</span>
-  <h1>Web installer</h1><p class="lead">Unlock the bootloader, install LineageOS or go back to stock, right from Chrome or Edge on a computer. No adb or fastboot install needed.</p></div></section>
+  <h1>Web installer</h1><p class="lead">Unlock the bootloader, install LineageOS or go back to stock, right from Chrome or Edge on a computer. No adb or fastboot install needed.</p>`)}
 <section class="section tight"><div class="shell narrow">
   <details class="inst-card"><summary>What you need</summary>
     <ul>
@@ -280,10 +343,9 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
   updates(ctx) {
     const { BASE } = ctx;
     return layout(ctx, { title: 'Updates', route: 'updates/', description: 'How to update my Android builds without losing data.', body: `
-<section class="page-hero"><div class="shell">${crumbs(ctx, [['Home', ''], ['Updates', 'updates/']])}
-  <h1>Updates</h1><p class="lead">Builds signed with the same keys install over each other and keep your data. Each release page says whether it is an update or needs a clean flash.</p></div></section>
+${hero(ctx, [['Home', ''], ['Updates', 'updates/']], '<h1>Updates</h1><p class="lead">Builds signed with the same keys install over each other and keep your data. Each release page says whether it is an update or needs a clean flash.</p>')}
 <section class="section tight"><div class="shell narrow">
-  <ol class="steps">
+  <ol class="steps steps-list">
     <li><h3>Check the release page</h3><p class="muted">Look for "no wipe needed" and stay on the same variant (Vanilla or GApps).</p></li>
     <li><h3>Reboot to sideload</h3><p class="muted">With USB debugging on: <code>adb reboot sideload-auto-reboot</code></p></li>
     <li><h3>Send the update</h3><p class="muted"><code>adb sideload &lt;rom&gt;.zip</code>. The phone reboots by itself when it is done.</p></li>
@@ -302,9 +364,8 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
       ['Do you take device requests?', 'Only for phones I own or can test on. Open an issue anyway: maybe someone can help test.'],
     ];
     return layout(ctx, { title: 'Support', route: 'support/', body: `
-<section class="page-hero"><div class="shell">${crumbs(ctx, [['Home', ''], ['Support', 'support/']])}
-  <h1>Support</h1><p class="lead">Questions, bugs and device requests go to GitHub Issues, so the answers help the next person too.</p>
-  <div class="actions"><a class="btn btn-accent" href="${REPO}/issues/new/choose" rel="noopener">Open an issue</a><a class="btn btn-ghost" href="${REPO}/issues?q=" rel="noopener">Search issues</a></div></div></section>
+${hero(ctx, [['Home', ''], ['Support', 'support/']], `<h1>Support</h1><p class="lead">Questions, bugs and device requests go to GitHub Issues, so the answers help the next person too.</p>
+  <div class="actions"><a class="btn btn-accent" href="${REPO}/issues/new/choose" rel="noopener">Open an issue</a><a class="btn btn-ghost" href="${REPO}/issues?q=" rel="noopener">Search issues</a></div>`)}
 <section class="section tight"><div class="shell narrow"><div class="section-head"><span class="eyebrow">FAQ</span><h2>Before you ask</h2></div>
   <div class="faq">${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>
   <p class="muted">Device-specific rules are on each device page, for example the <a href="${BASE}devices/">standing instructions</a>.</p>
@@ -313,7 +374,7 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
 
   notFound(ctx) {
     return layout(ctx, { title: 'Page not found', body: `
-<section class="page-hero"><div class="shell narrow center"><h1>Page not found</h1><p class="lead">That page moved or never existed.</p>
+<section class="page-hero not-found"><div class="shell narrow center"><span class="code404 mono" aria-hidden="true">404</span><h1>Page not found</h1><p class="lead">That page moved or never existed.</p>
 <div class="actions"><a class="btn btn-accent" href="${ctx.BASE}">Home</a><a class="btn btn-ghost" href="${ctx.BASE}devices/">Devices</a></div></div></section>` });
   },
 };
