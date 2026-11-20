@@ -4,7 +4,7 @@
 
 **Everything I build for Android: custom ROMs, kernels, recoveries, mods, changelogs and flashing guides.**
 
-[![Latest](https://img.shields.io/badge/Latest-LineageOS%20%C2%B7%2017.10.2026%20%C2%B7%20Mi%20A2-0b3d44?style=for-the-badge&logo=lineageos&logoColor=white)](https://github.com/iamimmanuelraj/AOSP/releases/latest)
+[![Latest](https://img.shields.io/badge/Latest-LineageOS%20%C2%B7%2028.10.2026%20%C2%B7%20Mi%20A2-0b3d44?style=for-the-badge&logo=lineageos&logoColor=white)](https://github.com/iamimmanuelraj/AOSP/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/iamimmanuelraj/AOSP/total?label=Downloads&style=for-the-badge&color=1c6f6a&cacheSeconds=3600)](https://github.com/iamimmanuelraj/AOSP/releases)
 [![Issues](https://img.shields.io/badge/Support-GitHub%20Issues-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/iamimmanuelraj/AOSP/issues)
 
@@ -16,7 +16,7 @@
 
 | Device | Codename | What's there | Latest |
 | --- | --- | --- | --- |
-| [**Xiaomi Mi A2**](DEVICES/xiaomi/jasmine_sprout/README.md) | `jasmine_sprout` | ROMs, kernels, recovery, flashing guides | [LineageOS · 17.10.2026](DEVICES/xiaomi/jasmine_sprout/ROMS/LineageOS/23.2/20261017/README.md) |
+| [**Xiaomi Mi A2**](DEVICES/xiaomi/jasmine_sprout/README.md) | `jasmine_sprout` | ROMs, kernels, recovery, flashing guides | [LineageOS · 28.10.2026](DEVICES/xiaomi/jasmine_sprout/ROMS/LineageOS/23.2/20261028/README.md) |
 | [**Xiaomi Redmi Note 5 Pro**](DEVICES/xiaomi/whyred/README.md) | `whyred` | ROMs | PixelExtended (official) |
 
 ## How this repo is laid out

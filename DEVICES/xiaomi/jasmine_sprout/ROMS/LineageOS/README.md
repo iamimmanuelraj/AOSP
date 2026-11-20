@@ -1,6 +1,6 @@
 # LineageOS - Xiaomi Mi A2 (jasmine_sprout)
 
-[![LineageOS 23.2 - Mi A2](23.2/20261017/banner.png)](23.2/20261017/README.md)
+[![LineageOS 23.2 - Mi A2](23.2/20261028/banner.png)](23.2/20261028/README.md)
 
 **[LineageOS ROM Source Code](https://github.com/LineageOS)** · [Changelog](CHANGELOG.md)
 
@@ -8,7 +8,8 @@
 
 | Version | Android | Build | Notes |
 | --- | --- | --- | --- |
-| [23.2](23.2/README.md) | 16 | **[17.10.2026](23.2/20261017/README.md)** (latest) | user, release-keys, dm-verity - Vanilla and GApps · [Release](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261017) |
+| [23.2](23.2/README.md) | 16 | **[28.10.2026](23.2/20261028/README.md)** (latest) | user, release-keys, dm-verity - Vanilla and GApps · Bluetooth fix, GApps zip installs again · [Release](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261028) |
+| [23.2](23.2/README.md) | 16 | [17.10.2026](23.2/20261017/README.md) | user, release-keys, dm-verity - Vanilla and GApps · Bluetooth crashes and the GApps zip fails (error 28), update to 28.10.2026 · [Release](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261017) |
 | [23.2](23.2/README.md) | 16 | [09.10.2026](23.2/20261009/README.md) | First test build · [Release](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261009) |
 
 ## Device Source Codes - Mi A2

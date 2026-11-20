@@ -4,7 +4,7 @@
 
 **UNOFFICIAL test build - Encrypted build (file-based encryption, AES-256-XTS) - Build date 09.10.2026**
 
-> **Superseded by the [17.10.2026 build](../20261017/README.md).**
+> **Superseded by the [28.10.2026 build](../20261028/README.md).**
 >
 > Experimental. Needs an unlocked bootloader. Known issues: mobile network / SIM not detected, double tap to wake, fingerprint and Widevine are not working yet.
 

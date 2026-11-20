@@ -4,7 +4,7 @@ ota_feeds: [lineageos-24]
 ---
 # Xiaomi Mi A2 (jasmine_sprout)
 
-[![Latest](https://img.shields.io/badge/Latest-LineageOS%20%C2%B7%2017.10.2026-0b3d44?style=for-the-badge&logo=lineageos&logoColor=white)](ROMS/LineageOS/README.md)
+[![Latest](https://img.shields.io/badge/Latest-LineageOS%20%C2%B7%2028.10.2026-0b3d44?style=for-the-badge&logo=lineageos&logoColor=white)](ROMS/LineageOS/README.md)
 
 Snapdragon 660 · A/B · everything I've built for the Mi A2. Read the [Standing Instructions](Standing_Instructions.md) before flashing.
 
@@ -12,7 +12,7 @@ Snapdragon 660 · A/B · everything I've built for the Mi A2. Read the [Standing
 
 | ROM | Status | Download | Docs |
 | --- | --- | --- | --- |
-| **LineageOS** | Unofficial · active | [GitHub Releases](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261017) | [Builds](ROMS/LineageOS/README.md) · [Changelog](ROMS/LineageOS/CHANGELOG.md) |
+| **LineageOS** | Unofficial · active | [GitHub Releases](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261028) | [Builds](ROMS/LineageOS/README.md) · [Changelog](ROMS/LineageOS/CHANGELOG.md) |
 | **PixelExperience** | Official | [pixelexperience.org](https://download.pixelexperience.org/jasmine_sprout) | [Info](ROMS/PixelExperience/README.md) · [Changelog](ROMS/PixelExperience/CHANGELOG.md) |
 | **PixelExperience** 11 Plus, 12, 12.1, 14 alpha | Unofficial · archived | [GitHub release](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) | [Info](ROMS/PixelExperience/README.md) |
 | **PixelOS** 14 | Unofficial · archived | [GitHub release](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) | - |
