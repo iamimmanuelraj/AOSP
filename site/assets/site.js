@@ -78,6 +78,9 @@
     tkBtn.setAttribute('aria-label', paused ? 'Play the news ticker' : 'Pause the news ticker');
   });
 
+  // ---- breadcrumbs: on narrow screens the trail scrolls; start it at the current page
+  $$('.crumbs ol').forEach((ol) => { ol.scrollLeft = ol.scrollWidth; });
+
   // ---- release filters
   const list = $('[data-filterable]');
   $$('[data-filter]').forEach((b) => b.addEventListener('click', () => {

@@ -131,8 +131,18 @@ function releaseRow(ctx, r, showDevice = true) {
     </a></li>`;
 }
 
-const crumbs = (ctx, items) => `<nav class="crumbs" aria-label="Breadcrumb"><ol>${items.map(([t, r], i) => i === items.length - 1
-  ? `<li><span aria-current="page">${esc(t)}</span></li>` : `<li><a href="${ctx.BASE}${r}">${esc(t)}</a></li>`).join('')}</ol></nav>`;
+// Breadcrumbs: ancestors are links, the current page is the last item (plain text, aria-current="page").
+// The chevron separators are CSS only (nothing for screen readers to read). The same trail is also emitted as schema.org BreadcrumbList.
+const crumbs = (ctx, items) => {
+  const last = items.length - 1;
+  const li = items.map(([t, r], i) => i === last
+    ? `<li><span class="crumb-current" aria-current="page"${t.length > 36 ? ` title="${esc(t)}"` : ''}>${esc(t)}</span></li>`
+    : `<li><a href="${ctx.BASE}${r}">${esc(t)}</a></li>`).join('');
+  const ld = { '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: items.map(([t, r], i) => ({ '@type': 'ListItem', position: i + 1, name: t, item: ctx.SITE_URL + r })) };
+  return `<nav class="crumbs" aria-label="Breadcrumb"><ol>${li}</ol></nav>
+<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`;
+};
 
 const article = (ctx, html, source) => `<article class="prose">${html}</article>
   <p class="edit"><a href="${esc(source)}" rel="noopener">View or edit this page on GitHub</a></p>`;
@@ -271,7 +281,7 @@ ${rom.releases.length ? `<section class="section tight"><div class="shell narrow
     downloadsAnchor.set(r.route, /id="downloads"/.test(html) ? 'downloads' : '');
     return layout(ctx, { title: r.title, description: `${r.title}: release notes, downloads, checksums and install steps.`, route: r.route,
       ogImage: r.banner ? BASE + r.banner : undefined, body: `
-${hero(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route], [r.os, `${r.route.split('/').slice(0, -3).join('/')}/`], [fmtDate(r.date), r.route]], `
+${hero(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route], [r.os, `${r.route.split('/').slice(0, -3).join('/')}/`], [`${romLabel(r)} · ${fmtDate(r.date)}`, r.route]], `
   <span class="mono tag">${esc(d.codename)}</span>
   <h1>${esc(romLabel(r))} <span class="h1-sub">for ${esc(d.name)}</span></h1>
   <div class="stats">
@@ -293,9 +303,15 @@ ${hero(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route], [r.os, `$
   doc(ctx) {
     const { device: d, html, source, title, route } = ctx;
     const trail = [['Home', '']];
+    // a page inside a ROM folder (changelog, version overview) gets that ROM as its parent crumb
+    const rom = d?.roms.find((r) => r.hasReadme && route !== r.route && route.startsWith(r.route));
     if (d) trail.push(['Devices', 'devices/'], [d.name, d.route]);
+    if (rom) trail.push([rom.os, rom.route]);
     trail.push([title, route]);
-    return layout(ctx, { title, route, body: `
+    // unique <title>: add the ROM and device when the page's own title does not already say them
+    const ctxWords = [rom?.os, d?.name].filter((x) => x && !title.toLowerCase().includes(x.toLowerCase()));
+    const pageTitle = [title, ...ctxWords].join(' · ');
+    return layout(ctx, { title: pageTitle, route, body: `
 ${hero(ctx, trail, `<h1>${esc(title)}</h1>`)}
 <section class="section tight"><div class="shell narrow">${article(ctx, html, source)}</div></section>` });
   },

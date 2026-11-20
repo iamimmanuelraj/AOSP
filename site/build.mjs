@@ -175,7 +175,8 @@ const write = (route, html) => {
   fs.mkdirSync(path.dirname(f), { recursive: true });
   fs.writeFileSync(f, html);
 };
-const ctx = { BASE, REPO, devices, allReleases, fmtDate, isoDate };
+const SITE_URL = process.env.SITE_URL || 'https://aosp.immanuelraj.dev/';
+const ctx = { BASE, REPO, SITE_URL, devices, allReleases, fmtDate, isoDate };
 
 // static assets of the site itself
 fs.cpSync(path.join(SITE, 'assets'), path.join(OUT, 'assets'), { recursive: true });
@@ -208,7 +209,6 @@ write('updates/', page.updates(ctx));
 write('404.html', page.notFound(ctx));
 
 // sitemap for search engines
-const SITE_URL = process.env.SITE_URL || 'https://aosp.immanuelraj.dev/';
 const routes = ['', 'devices/', 'releases/', 'support/', 'install/', 'install/web/', 'updates/', ...mdFiles.map((f) => routeByFile.get(path.resolve(f)))];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...new Set(routes)].map((r) => `  <url><loc>${esc(SITE_URL + r)}</loc></url>`).join('\n')}\n</urlset>\n`);
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}sitemap.xml\n`);
