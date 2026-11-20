@@ -24,7 +24,7 @@ const devices = JSON.parse($('#installer-devices').textContent); // [{codename, 
 const state = { cfg: null, flow: null, files: new Map(), verified: new Map(), opts: {}, fb: null, running: false };
 
 // ---------- log ----------
-const logBox = h('pre', { class: 'inst-log', 'aria-live': 'polite' });
+const logBox = h('pre', { class: 'inst-log', role: 'log', 'aria-label': 'Installer log', tabindex: '0' });
 const log = (msg, cls = '') => { const line = h('span', { class: cls }, `${new Date().toLocaleTimeString()}  ${msg}\n`); logBox.append(line); logBox.scrollTop = logBox.scrollHeight; };
 setDebugLevel(1);
 setDebugLogger((...a) => { const s = a.join(' '); if (!/^(Response|Command): (OKAY|INFO)?\s*$/.test(s)) log(s, 'dim'); });
@@ -60,7 +60,7 @@ function renderFlow() {
   const box = $('#inst-flow'); box.replaceChildren();
   box.append(h('p', { class: 'lead' }, f.summary));
   if (f.enabled === false) { box.append(h('div', { class: 'inst-alert' }, f.disabledText || 'Not available yet.')); return; }
-  if (f.before?.length) box.append(h('div', { class: 'inst-card' }, h('h3', {}, 'Before you start'), h('ol', {}, f.before.map((t) => h('li', {}, t)))));
+  if (f.before?.length) box.append(h('div', { class: 'inst-card' }, h('h2', {}, 'Before you start'), h('ol', {}, f.before.map((t) => h('li', {}, t)))));
 
   // options
   state.opts = {};
@@ -72,13 +72,13 @@ function renderFlow() {
   }
   box.append(h('div', { id: 'inst-files' }));
   box.append(h('div', { class: 'inst-card' },
-    h('h3', {}, 'Run'),
+    h('h2', {}, 'Run'),
     h('p', { class: 'muted' }, 'Connect the phone in FASTBOOT mode with a good USB cable, directly to the computer (no hub). Keep this tab open and the computer awake until it says done.'),
     h('div', { class: 'actions' },
       h('button', { class: 'btn btn-ghost', id: 'inst-connect', type: 'button', onclick: connect }, 'Connect phone'),
       h('button', { class: 'btn btn-accent', id: 'inst-start', type: 'button', onclick: run, disabled: true }, `Start: ${f.title}`)),
-    h('div', { id: 'inst-prompt' }),
-    h('div', { class: 'inst-progress', hidden: true, id: 'inst-progress' }, h('div', { class: 'bar' }), h('span', { class: 'label' }))));
+    h('div', { id: 'inst-prompt', role: 'status', 'aria-live': 'polite' }),
+    h('div', { class: 'inst-progress', hidden: true, id: 'inst-progress', role: 'progressbar', 'aria-label': 'Progress', 'aria-valuemin': '0', 'aria-valuemax': '100' }, h('div', { class: 'bar' }), h('span', { class: 'label' }))));
   renderFiles();
 }
 
@@ -99,17 +99,17 @@ function renderFiles() {
   for (const id of need) (bySource[state.cfg.files[id].from] ||= []).push(id);
   for (const [src, ids] of Object.entries(bySource)) {
     const s = state.cfg.sources[src];
-    const table = h('table', {}, h('thead', {}, h('tr', {}, h('th', {}, 'File'), h('th', {}, 'Size'), h('th', {}, 'Check'))),
+    const table = h('table', {}, h('caption', {}, `Files for: ${s.title}`), h('thead', {}, h('tr', {}, h('th', { scope: 'col' }, 'File'), h('th', { scope: 'col' }, 'Size'), h('th', { scope: 'col' }, 'Check'))),
       h('tbody', {}, ids.map((id) => {
         const file = state.files.get(id); const v = state.verified.get(id);
         return h('tr', {}, h('td', { class: 'mono' }, file?.name || state.cfg.files[id].label),
           h('td', {}, file ? fmtBytes(file.size) : '-'),
           h('td', { class: v === true ? 'ok' : v === false ? 'bad' : 'muted' }, !file ? 'missing' : v === true ? 'SHA-256 OK' : v === false ? 'WRONG FILE' : typeof v === 'string' ? v : 'not checked'));
       })));
-    box.append(h('div', { class: 'inst-card' }, h('h3', {}, s.title), h('p', { class: 'muted' }, s.help),
+    box.append(h('div', { class: 'inst-card' }, h('h2', {}, s.title), h('p', { class: 'muted' }, s.help),
       h('div', { class: 'actions' },
-        h('label', { class: 'btn btn-ghost btn-sm' }, 'Select files', h('input', { type: 'file', multiple: true, hidden: true, onchange: (e) => addFiles(e.target.files) })),
-        h('label', { class: 'btn btn-ghost btn-sm' }, 'Select folder', h('input', { type: 'file', webkitdirectory: true, hidden: true, onchange: (e) => addFiles(e.target.files) })),
+        h('label', { class: 'btn btn-ghost btn-sm' }, 'Select files', h('input', { type: 'file', class: 'file-in', multiple: true, onchange: (e) => addFiles(e.target.files) })),
+        h('label', { class: 'btn btn-ghost btn-sm' }, 'Select folder', h('input', { type: 'file', class: 'file-in', webkitdirectory: true, onchange: (e) => addFiles(e.target.files) })),
         h('button', { class: 'btn btn-accent btn-sm', type: 'button', onclick: () => verify(ids) }, 'Check files')),
       h('div', { class: 'table-wrap' }, table)));
   }
@@ -181,7 +181,7 @@ function prompt(text, button, cls = '') {
 
 function progress(label, frac) {
   const p = $('#inst-progress'); p.hidden = frac === null;
-  if (frac !== null) { $('.bar', p).style.width = `${Math.round(frac * 100)}%`; $('.label', p).textContent = `${label} · ${Math.round(frac * 100)} %`; }
+  if (frac !== null) { p.setAttribute('aria-valuenow', String(Math.round(frac * 100))); $('.bar', p).style.width = `${Math.round(frac * 100)}%`; $('.label', p).textContent = `${label} · ${Math.round(frac * 100)} %`; }
 }
 
 // ---------- run a flow ----------
@@ -209,10 +209,10 @@ async function run() {
 const issues = supportIssues();
 root.replaceChildren(
   issues.length ? h('div', { class: 'inst-alert bad' }, issues.map((t) => h('p', {}, t))) : '',
-  h('div', { class: 'inst-card' }, h('h3', {}, 'Your phone'),
-    h('div', { class: 'filters' }, devices.map((d) => h('button', { class: 'chip-btn', type: 'button', 'aria-pressed': 'false',
+  h('div', { class: 'inst-card' }, h('h2', {}, 'Your phone'),
+    h('div', { class: 'filters', role: 'group', 'aria-label': 'Choose your phone' }, devices.map((d) => h('button', { class: 'chip-btn', type: 'button', 'aria-pressed': 'false',
       onclick: (e) => { root.querySelectorAll('.inst-dev').forEach((b) => b.setAttribute('aria-pressed', 'false')); e.target.setAttribute('aria-pressed', 'true'); loadDevice(d.codename); }, }, d.name)).map((b) => { b.classList.add('inst-dev'); return b; }))),
-  h('div', { class: 'filters', id: 'inst-flows', role: 'tablist' }),
+  h('div', { class: 'filters', id: 'inst-flows', role: 'group', 'aria-label': 'What to do' }),
   h('div', { id: 'inst-flow' }),
   h('details', { class: 'inst-card', open: true }, h('summary', {}, 'Log'), logBox,
     h('button', { class: 'btn btn-ghost btn-sm', type: 'button', onclick: () => navigator.clipboard.writeText(logBox.textContent) }, 'Copy log')),

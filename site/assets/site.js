@@ -73,19 +73,27 @@
   // ---- news ticker: pause button (hover and focus pause it in CSS)
   const tk = $('[data-ticker]'); const tkBtn = $('[data-ticker-toggle]');
   tkBtn?.addEventListener('click', () => {
-    const paused = tkBtn.getAttribute('aria-pressed') !== 'true';
-    tkBtn.setAttribute('aria-pressed', String(paused)); tk.classList.toggle('paused', paused);
+    const paused = !tk.classList.contains('paused');
+    tk.classList.toggle('paused', paused);
     tkBtn.setAttribute('aria-label', paused ? 'Play the news ticker' : 'Pause the news ticker');
+  });
+
+  // focused ticker link: bring its start to the left edge of the view (long items on phones)
+  const tkView = $('.tk-view', tk || document);
+  tk?.addEventListener('focusin', (e) => {
+    const a = e.target.closest?.('.tk-group a'); if (!a || !tkView) return;
+    requestAnimationFrame(() => { tkView.scrollLeft += a.getBoundingClientRect().left - tkView.getBoundingClientRect().left - 8; });
   });
 
   // ---- breadcrumbs: on narrow screens the trail scrolls; start it at the current page
   $$('.crumbs ol').forEach((ol) => { ol.scrollLeft = ol.scrollWidth; });
 
   // ---- release filters
-  const list = $('[data-filterable]');
+  const list = $('[data-filterable]'); const filterStatus = $('[data-filter-status]');
   $$('[data-filter]').forEach((b) => b.addEventListener('click', () => {
     $$('[data-filter]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
     $$('[data-device]', list).forEach((li) => { li.hidden = !!b.dataset.filter && li.dataset.device !== b.dataset.filter; });
+    if (filterStatus) { const n = $$('[data-device]', list).filter((li) => !li.hidden).length; filterStatus.textContent = `Showing ${n} ${n === 1 ? 'release' : 'releases'}${b.dataset.filter ? ` for ${b.textContent}` : ''}`; }
   }));
 
   // ---- Markdown tables: label cells for the stacked phone layout; keyboard-scrollable wide tables
@@ -95,18 +103,32 @@
       $$('tbody tr', t).forEach((tr) => $$('td', tr).forEach((td, i) => td.setAttribute('data-label', heads[i] || '')));
       t.classList.add('stack');
     }
+    // the stacked layout is display:block, which drops table semantics in some browsers: restore them
+    t.setAttribute('role', 'table');
+    $$('thead, tbody', t).forEach((g) => g.setAttribute('role', 'rowgroup'));
+    $$('tr', t).forEach((tr) => tr.setAttribute('role', 'row'));
+    $$('th', t).forEach((c) => c.setAttribute('role', 'columnheader'));
+    $$('td', t).forEach((c) => c.setAttribute('role', 'cell'));
+    // keyboard-scrollable region, named after the heading above it
     const wrap = t.closest('.table-wrap');
-    if (wrap) { wrap.tabIndex = 0; wrap.setAttribute('role', 'region'); wrap.setAttribute('aria-label', 'Table'); }
+    if (wrap) {
+      let h = wrap; while (h && !/^H[1-6]$/.test(h.tagName)) h = h.previousElementSibling;
+      const name = h ? h.textContent.replace(/^#/, '').trim() : '';
+      wrap.tabIndex = 0; wrap.setAttribute('role', 'region'); wrap.setAttribute('aria-label', name ? `Table: ${name}` : 'Table');
+      t.setAttribute('aria-label', name || 'Table');
+    }
   });
 
   // ---- copy button on code blocks
   $$('.prose pre').forEach((pre) => {
     const wrap = document.createElement('div'); wrap.className = 'pre-wrap';
     pre.replaceWith(wrap); wrap.append(pre);
-    const b = document.createElement('button'); b.type = 'button'; b.className = 'copy-btn'; b.textContent = 'Copy';
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'copy-btn'; b.textContent = 'Copy'; b.setAttribute('aria-label', 'Copy code to clipboard');
     b.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(pre.textContent.replace(/\n$/, '')); b.textContent = 'Copied'; } catch { b.textContent = 'Press Ctrl+C'; }
-      setTimeout(() => { b.textContent = 'Copy'; }, 1800);
+      let msg = 'Copied to clipboard';
+      try { await navigator.clipboard.writeText(pre.textContent.replace(/\n$/, '')); b.textContent = 'Copied'; } catch { b.textContent = 'Press Ctrl+C'; msg = 'Could not copy: select the code and press Ctrl+C'; }
+      if (themeStatus) themeStatus.textContent = msg; // the page's polite live region
+      setTimeout(() => { b.textContent = 'Copy'; if (themeStatus) themeStatus.textContent = ''; }, 1800);
     });
     wrap.append(b);
   });

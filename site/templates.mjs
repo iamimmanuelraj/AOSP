@@ -28,13 +28,13 @@ function ticker(ctx) {
   const { BASE } = ctx;
   const items = newsItems(ctx);
   const group = (hidden) => `<ul class="tk-group"${hidden ? ' aria-hidden="true"' : ''}>${items.map((n) => `<li><a href="${BASE}${n.href}"${hidden ? ' tabindex="-1"' : ''}><span class="tk-tag">${esc(n.tag)}</span>${esc(n.text)}</a></li>`).join('')}</ul>`;
-  return `<div class="ticker" role="region" aria-label="Latest news" style="--tk-dur:${items.length * 7}s" data-ticker>
-  <div class="tk-label"><span>News</span><button class="tk-toggle" type="button" aria-pressed="false" aria-label="Pause the news ticker" data-ticker-toggle>${ICONS.pause}${ICONS.play}</button></div>
+  return `<section class="ticker" aria-label="Latest news" style="--tk-dur:${items.length * 7}s" data-ticker>
+  <div class="tk-label"><span>News</span><button class="tk-toggle" type="button" aria-label="Pause the news ticker" data-ticker-toggle>${ICONS.pause}${ICONS.play}</button></div>
   <div class="tk-view"><div class="tk-track">${group(false)}${group(true)}</div></div>
-</div>`;
+</section>`;
 }
 
-function layout(ctx, { title, description, body, route = '', ogImage }) {
+function layout(ctx, { title, description, body, route = '', ogImage, noindex = false }) {
   const { BASE, REPO, allReleases } = ctx;
   const latest = allReleases[0];
   const nav = [
@@ -53,7 +53,7 @@ function layout(ctx, { title, description, body, route = '', ogImage }) {
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:type" content="website">
 <meta property="og:image" content="${esc(ogImage || `${BASE}assets/banner-android-builds.png`)}">
-<meta name="color-scheme" content="light dark">
+${noindex ? '<meta name="robots" content="noindex">\n' : ''}<meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#06161c" media="(prefers-color-scheme: dark)">
 <script>${THEME_BOOT}</script>
@@ -66,6 +66,7 @@ function layout(ctx, { title, description, body, route = '', ogImage }) {
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
+${latest ? ticker(ctx) : ''}
 <header class="header" data-header>
   <div class="shell header-in">
     <a class="logo" href="${BASE}" aria-label="Android Builds home">
@@ -78,12 +79,11 @@ function layout(ctx, { title, description, body, route = '', ogImage }) {
     </nav>
     <button class="theme-btn" type="button" aria-label="Theme: system. Switch to light." title="Theme: system" data-theme-toggle>${ICONS.system}${ICONS.light}${ICONS.dark}</button>
     ${latest ? `<a class="btn btn-accent btn-sm cta" href="${BASE}${latest.route}">Get the latest</a>` : ''}
-    <button class="menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menu" data-menu><span></span><span></span><span></span></button>
+    <button class="menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Main menu" data-menu><span></span><span></span><span></span></button>
   </div>
 </header>
-${latest ? ticker(ctx) : ''}
 <p class="sr-only" role="status" aria-live="polite" data-theme-status></p>
-<main id="main">
+<main id="main" tabindex="-1">
 ${body}
 </main>
 <footer class="footer">
@@ -108,12 +108,12 @@ ${body}
 
 const label = (k, v) => v ? `<div class="kv"><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></div>` : '';
 
-function deviceCard(ctx, d) {
+function deviceCard(ctx, d, h = 3) {
   const { BASE, fmtDate } = ctx;
   const l = d.latest;
   return `<a class="card device-card" href="${BASE}${d.route}">
     <div class="card-top"><span class="mono tag">${esc(d.codename)}</span>${l ? '<span class="chip chip-ok">Active</span>' : '<span class="chip">Archive</span>'}</div>
-    <h3>${esc(d.name)}</h3>
+    <h${h}>${esc(d.name)}</h${h}>
     <p class="muted">${esc(d.summary)}</p>
     ${l ? `<div class="kvs">${label('Latest', romLabel(l))}${label('Android', androidOf(l.title))}${label('Date', fmtDate(l.date))}</div>` : ''}
     <span class="more">Open device <span aria-hidden="true">→</span></span>
@@ -229,7 +229,7 @@ export const page = {
   devices(ctx) {
     return layout(ctx, { title: 'Devices', route: 'devices/', body: `
 ${hero(ctx, [['Home', ''], ['Devices', 'devices/']], '<h1>Devices</h1><p class="lead">Every phone I build for. Pick yours for ROMs, kernels, recoveries and guides.</p>', { narrow: false })}
-<section class="section tight"><div class="shell"><div class="grid">${ctx.devices.map((d) => deviceCard(ctx, d)).join('')}</div></div></section>` });
+<section class="section tight"><div class="shell"><div class="grid">${ctx.devices.map((d) => deviceCard(ctx, d, 2)).join('')}</div></div></section>` });
   },
 
   releases(ctx) {
@@ -237,6 +237,7 @@ ${hero(ctx, [['Home', ''], ['Devices', 'devices/']], '<h1>Devices</h1><p class="
 ${hero(ctx, [['Home', ''], ['Releases', 'releases/']], '<h1>Releases</h1><p class="lead">Every build, newest first. Downloads are on GitHub Releases; each page has the notes, checksums and install steps.</p>')}
 <section class="section tight"><div class="shell narrow">
   <div class="filters" role="group" aria-label="Filter by device"><button class="chip-btn" aria-pressed="true" data-filter="">All</button>${ctx.devices.filter((d) => d.latest).map((d) => `<button class="chip-btn" aria-pressed="false" data-filter="${esc(d.codename)}">${esc(d.name)}</button>`).join('')}</div>
+  <p class="sr-only" role="status" aria-live="polite" data-filter-status></p>
   <ul class="release-list" data-filterable>${ctx.allReleases.map((r) => releaseRow(ctx, r).replace('<li class="release-row">', `<li class="release-row" data-device="${esc(r.device.codename)}">`)).join('')}</ul>
 </div></section>` });
   },
@@ -251,7 +252,7 @@ ${hero(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route]], `
   <h1>${esc(d.name)}</h1><p class="lead">${esc(d.summary)}</p>
   ${d.guides.length ? `<div class="guides"><span class="k">Guides</span><div class="actions">${d.guides.map((g) => `<a class="btn btn-ghost btn-sm" href="${BASE}${g.route}">${esc(g.title)}</a>`).join('')}</div></div>` : ''}
   ${l ? `<div class="latest card">
-    <div><span class="eyebrow">Latest build</span><h3>${esc(romLabel(l))}</h3>
+    <div><span class="eyebrow">Latest build</span><h2>${esc(romLabel(l))}</h2>
     <div class="kvs">${label('Android', androidOf(l.title))}${label('Date', fmtDate(l.date))}${label('Release', l.tag)}</div></div>
     <div class="actions"><a class="btn btn-accent" href="${BASE}${l.route}">Release notes & download</a></div>
   </div>` : ''}`)}
@@ -322,6 +323,7 @@ ${hero(ctx, trail, `<h1>${esc(title)}</h1>`)}
 ${hero(ctx, [['Home', ''], ['Install', 'install/']], `<h1>Install</h1><p class="lead">Unlock, flash, update or go back to stock. Pick your phone for its exact steps: every phone is different, and the release page always has the steps for that build.</p>
   <div class="actions"><a class="btn btn-accent" href="${BASE}install/web/">Open the web installer</a></div>`, { narrow: false })}
 <section class="section tight"><div class="shell">
+  <h2 class="sr-only">Before you start</h2>
   <ol class="steps">
     <li><h3>Back up</h3><p class="muted">Unlocking the bootloader and a clean install erase everything on the phone.</p></li>
     <li><h3>Get the tools</h3><p class="muted">Install the latest <a href="https://developer.android.com/tools/releases/platform-tools" rel="noopener">platform tools</a> (adb and fastboot) on your computer.</p></li>
@@ -364,6 +366,7 @@ ${hero(ctx, [['Home', ''], ['Install', 'install/'], ['Web installer', 'install/w
     return layout(ctx, { title: 'Updates', route: 'updates/', description: 'How to update my Android builds without losing data.', body: `
 ${hero(ctx, [['Home', ''], ['Updates', 'updates/']], '<h1>Updates</h1><p class="lead">Builds signed with the same keys install over each other and keep your data. Each release page says whether it is an update or needs a clean flash.</p>')}
 <section class="section tight"><div class="shell narrow">
+  <h2 class="sr-only">How to update</h2>
   <ol class="steps steps-list">
     <li><h3>Check the release page</h3><p class="muted">Look for "no wipe needed" and stay on the same variant (Vanilla or GApps).</p></li>
     <li><h3>Reboot to sideload</h3><p class="muted">With USB debugging on: <code>adb reboot sideload-auto-reboot</code></p></li>
@@ -395,7 +398,7 @@ ${hero(ctx, [['Home', ''], ['Support', 'support/']], `<h1>Support</h1><p class="
 
   notFound(ctx) {
     return layout(ctx, { title: 'Page not found', body: `
-<section class="page-hero not-found"><div class="shell narrow center"><span class="code404 mono" aria-hidden="true">404</span><h1>Page not found</h1><p class="lead">That page moved or never existed.</p>
-<div class="actions"><a class="btn btn-accent" href="${ctx.BASE}">Home</a><a class="btn btn-ghost" href="${ctx.BASE}devices/">Devices</a></div></div></section>` });
+<section class="page-hero not-found"><div class="shell narrow center"><span class="code404 mono" aria-hidden="true">404</span><h1>Page not found</h1><p class="lead">That address does not exist here: the page may have moved, or the link has a typo. Try one of these instead.</p>
+<div class="actions"><a class="btn btn-accent" href="${ctx.BASE}">Go to the home page</a><a class="btn btn-ghost" href="${ctx.BASE}devices/">Browse devices</a><a class="btn btn-ghost" href="${ctx.BASE}releases/">See all releases</a><a class="btn btn-ghost" href="${ctx.BASE}install/">Install guide</a><a class="btn btn-ghost" href="${ctx.BASE}support/">Get support</a></div></div></section>`, noindex: true });
   },
 };

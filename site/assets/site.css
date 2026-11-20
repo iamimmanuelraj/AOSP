@@ -79,21 +79,21 @@ h1,h2,h3,h4{text-wrap:balance}
 @media (min-width:768px){.shell{padding:0 32px}}
 
 main{flex:1 0 auto}
-.ticker{order:-1}
-.header{order:0}
+main:focus{outline:none}
 
 /* news ticker: a brand-green band; the track holds the items twice and slides by exactly one copy */
 .ticker{display:flex;align-items:stretch;height:var(--tk-h);background:var(--brand);color:var(--on-brand);font-size:14px;font-weight:500;position:relative;z-index:60;overflow:hidden}
-.tk-label{display:flex;align-items:center;gap:4px;flex:none;padding:0 6px 0 16px;background:var(--navy);color:var(--brand);font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;position:relative;z-index:2}
-.tk-label::after{content:"";position:absolute;right:-14px;top:0;bottom:0;width:14px;background:var(--navy);clip-path:polygon(0 0,0 100%,100% 0)}
+.tk-label{display:flex;align-items:center;gap:2px;flex:none;padding:0 30px 0 16px;background:var(--navy);color:var(--brand);font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;position:relative;z-index:2;clip-path:polygon(0 0,100% 0,calc(100% - 16px) 100%,0 100%)}
 .tk-toggle{display:grid;place-items:center;width:var(--tk-h);height:var(--tk-h);margin:0;padding:0;border:0;background:none;color:inherit;cursor:pointer;border-radius:0}
 .tk-toggle:hover{color:#fff}
 .tk-toggle .tk-i-play{display:none}
-.tk-toggle[aria-pressed=true] .tk-i-play{display:block}
-.tk-toggle[aria-pressed=true] .tk-i-pause{display:none}
-.tk-view{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;margin-left:14px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent)}
+.ticker.paused .tk-i-play{display:block}
+.ticker.paused .tk-i-pause{display:none}
+.tk-view{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;margin-left:-8px;-webkit-mask-image:linear-gradient(90deg,transparent 8px,#000 30px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent 8px,#000 30px,#000 calc(100% - 22px),transparent)}
 .tk-track{display:flex;width:max-content;animation:tk var(--tk-dur,40s) linear infinite;will-change:transform}
-.ticker:hover .tk-track,.ticker:focus-within .tk-track,.ticker.paused .tk-track{animation-play-state:paused}
+.ticker:hover .tk-track,.ticker.paused .tk-track{animation-play-state:paused}
+/* keyboard focus: stop sliding so the focused link stays in view (the view scrolls to it) */
+.ticker:focus-within .tk-track{animation:none}
 .tk-group{display:flex;flex:none;justify-content:space-around;min-width:100vw;margin:0;padding:0;list-style:none}
 .tk-group li{display:flex}
 .tk-group a{display:flex;align-items:center;gap:10px;min-height:var(--tk-h);padding:0 22px;color:inherit;text-decoration:none;white-space:nowrap}
@@ -101,6 +101,8 @@ main{flex:1 0 auto}
 .tk-group a:hover{color:var(--on-brand);text-decoration:underline;text-underline-offset:4px}
 .tk-tag{padding:2px 9px;border-radius:var(--pill);background:var(--navy);color:#fff;font:600 10.5px/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase}
 .ticker :focus-visible{outline-color:var(--navy);outline-offset:-3px}
+.tk-label :focus-visible{outline-color:#fff}
+.section-band :focus-visible,.pre-wrap :focus-visible{outline-color:#8ab4f8}
 @keyframes tk{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){
   .tk-track{animation:none;will-change:auto}
@@ -338,7 +340,7 @@ a.card:hover .more{color:var(--accent-strong)}
 
 /* web installer */
 .inst-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;margin:16px 0;box-shadow:var(--shadow-sm)}
-.inst-card h3{margin:0 0 8px;font-size:18px;line-height:1.3}
+.inst-card h2,.inst-card h3{margin:0 0 8px;font-size:18px;line-height:1.3}
 .inst-card ol,.inst-card ul{margin:8px 0 0;padding-left:1.3em}
 .inst-card li{margin:6px 0}
 .inst-card summary{font-weight:600;cursor:pointer;min-height:32px;display:flex;align-items:center}
@@ -359,12 +361,15 @@ a.card:hover .more{color:var(--accent-strong)}
 .inst-card .table-wrap{margin:12px 0 0}
 .inst-card table{border-collapse:collapse;width:100%;font-size:14px}
 .inst-card th,.inst-card td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+.inst-card caption{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .inst-card th{background:var(--bg-muted);color:var(--ink-3);font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase}
 .inst-card tr:last-child td{border-bottom:0}
 td.ok{color:var(--ok-ink);font-weight:700}td.bad{color:var(--bad);font-weight:700}
 button{font-family:inherit}
 button[disabled]{opacity:.45;cursor:not-allowed;transform:none!important}
-label.btn input{display:none}
+label.btn{position:relative}
+label.btn input.file-in{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+label.btn:focus-within{outline:3px solid var(--focus);outline-offset:2px}
 
 /* footer */
 .footer{border-top:1px solid var(--line);background:var(--bg-muted);padding:clamp(36px,5vw,56px) 0;margin-top:clamp(32px,5vw,64px)}

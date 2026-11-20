@@ -127,12 +127,15 @@ const allReleases = devices.flatMap((d) => d.roms.flatMap((r) => r.releases.map(
 function renderMarkdown(body, file) {
   const seen = new Map();
   const marked = new Marked({ gfm: true });
+  // the page's own H1 is generated, so a document that still has H1s of its own (sections written as "# ...") gets every heading one level lower
+  const shift = marked.lexer(body).some((t) => t.type === 'heading' && t.depth === 1) ? 1 : 0;
   marked.use({
     renderer: {
       heading({ tokens, depth }) {
         const text = this.parser.parseInline(tokens);
         const id = slugify(text, seen);
-        return `<h${depth} id="${id}"><a class="anchor" href="#${id}" aria-hidden="true">#</a>${text}</h${depth}>\n`;
+        const level = Math.min(6, depth + shift);
+        return `<h${level} id="${id}"><a class="anchor" href="#${id}" aria-hidden="true" tabindex="-1">#</a>${text}</h${level}>\n`;
       },
     },
     walkTokens(token) {
@@ -140,7 +143,7 @@ function renderMarkdown(body, file) {
     },
     hooks: {
       postprocess(html) {
-        return html.replace(/<table>/g, '<div class="table-wrap"><table>').replace(/<\/table>/g, '</table></div>')
+        return html.replace(/<table>/g, '<div class="table-wrap"><table>').replace(/<th(?=[ >])/g, '<th scope="col"').replace(/<\/table>/g, '</table></div>')
           .replace(/<a href="(https?:\/\/[^"]+)"/g, '<a href="$1" rel="noopener"');
       },
     },
