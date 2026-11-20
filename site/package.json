@@ -1,0 +1,14 @@
+{
+  "name": "aosp-site",
+  "private": true,
+  "type": "module",
+  "description": "Static site for github.com/iamimmanuelraj/AOSP: renders the Markdown in DEVICES/ into pages, plus the OTA update API and the web installer",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node build.mjs && npx --yes http-server ../_site -p 8080 -c-1"
+  },
+  "dependencies": {
+    "marked": "15.0.12",
+    "js-yaml": "4.1.0"
+  }
+}
