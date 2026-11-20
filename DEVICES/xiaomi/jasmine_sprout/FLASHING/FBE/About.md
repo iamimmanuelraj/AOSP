@@ -83,7 +83,7 @@ Check this out!
 [Mi A2 ROMs](../../README.md)
 
 # Sources, References and Thanks!  
-- [AOSP's Documentation Regarding FBE](https://source.android.com/security/encryption/file-based)
+- [AOSP's Documentation Regarding FBE](https://source.android.com/docs/security/features/encryption/file-based)
 - [Kaiti Norton's Article Explaining Difference between FBE And FDE](https://www.esecurityplanet.com/threats/disk-vs-file-encryption-which-is-best-for-you/)
 
 Thanks for Reading this! Hope you liked it

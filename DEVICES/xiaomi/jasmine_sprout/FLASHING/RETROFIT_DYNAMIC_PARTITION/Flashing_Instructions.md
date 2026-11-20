@@ -10,8 +10,8 @@
 
 5) Now go to Reboot to bootloader (the normal bootloader, NOT "Enter fastboot"/fastbootd - wipe-super fails in fastbootd)
 
-6) Download super_empty.img from [HERE](https://github.com/PixelExperience-Devices/device_xiaomi_jasmine_sprout/releases/download/v1.0.0/super_empty.img)
+6) Download super_empty.img from [HERE](https://github.com/iamimmanuelraj/AOSP/releases/download/lineageos-23.2-jasmine_sprout-20261028/super_empty-lineage-23.2-jasmine_sprout.img)
 
-7) Enter this command "fastboot wipe-super super_empty.img" (without --slot=all), then boot back to recovery (Vol Up + Power)
+7) Enter this command "fastboot wipe-super super_empty-lineage-23.2-jasmine_sprout.img" (without --slot=all), then boot back to recovery (Vol Up + Power)
 
 8) Finally back to recovery, install rom with adb sideload

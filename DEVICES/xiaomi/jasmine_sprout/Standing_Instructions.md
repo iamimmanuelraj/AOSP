@@ -14,7 +14,7 @@ When it comes to my custom ROMs, I've incorporated several important features an
 - **Modifications and Hacks:** While I don't actively encourage the use of modifications or hacks, you're free to employ them at your own risk. Please note that I won't provide support for such alterations.
 - **DFE and Kernel:** Avoid flashing DFE separately, and refrain from changing the default kernel in the ROM. If you do decide to change it, make sure to choose a kernel that supports OSS Camera, QTI haptics, QTI PERF, and Aidl vibrator-based light HAL.
 - **Updates:** For installing updates, use ADB SIDELOAD with the provided recovery that is inbuilt.
-- **Kernel Details:** The kernels used in all my ROMs and recoveries can be found at [this GitHub repository](https://github.com/Atom-X-Devs/android_kernel_xiaomi_scarlet).
+- **Kernel Details:** The kernels used in all my ROMs and recoveries can be found at [this GitHub repository](https://github.com/Atom-X-Devs/scarlet_xiaomi_sdm660).
 
 **Recovery**
 

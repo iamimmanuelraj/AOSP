@@ -13,7 +13,7 @@ Snapdragon 660 · A/B · everything I've built for the Mi A2. Read the [Standing
 | ROM | Status | Download | Docs |
 | --- | --- | --- | --- |
 | **LineageOS** | Unofficial · active | [GitHub Releases](https://github.com/iamimmanuelraj/AOSP/releases/tag/lineageos-23.2-jasmine_sprout-20261028) | [Builds](ROMS/LineageOS/README.md) · [Changelog](ROMS/LineageOS/CHANGELOG.md) |
-| **PixelExperience** | Official | [pixelexperience.org](https://download.pixelexperience.org/jasmine_sprout) | [Info](ROMS/PixelExperience/README.md) · [Changelog](ROMS/PixelExperience/CHANGELOG.md) |
+| **PixelExperience** | Official | [pixelexperience.org](https://get.pixelexperience.org/jasmine_sprout) | [Info](ROMS/PixelExperience/README.md) · [Changelog](ROMS/PixelExperience/CHANGELOG.md) |
 | **PixelExperience** 11 Plus, 12, 12.1, 14 alpha | Unofficial · archived | [GitHub release](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) | [Info](ROMS/PixelExperience/README.md) |
 | **PixelOS** 14 | Unofficial · archived | [GitHub release](https://github.com/iamimmanuelraj/AOSP/releases/tag/Import-From-Sourceforge) | - |
 | **ArrowOS** | Official | [arrowos.net](https://arrowos.net/download) | [Info](ROMS/ArrowOS/README.md) |
@@ -28,7 +28,7 @@ Snapdragon 660 · A/B · everything I've built for the Mi A2. Read the [Standing
 
 | Kernel | Notes |
 | --- | --- |
-| [android_kernel_xiaomi_sdm660](https://github.com/iamimmanuelraj/android_kernel_xiaomi_sdm660/tree/lineage-a16) | LineageOS SDM660 4.19, branch `lineage-a16` - used by LineageOS 23.2 |
+| [android_kernel_xiaomi_sdm660](https://github.com/iamimmanuelraj/android_kernel_xiaomi_sdm660/tree/lineage-23.2) | LineageOS SDM660 4.19, branch `lineage-23.2` - used by LineageOS 23.2 |
 | [kernel_xiaomi_jasmine_sprout](https://github.com/iamimmanuelraj/kernel_xiaomi_jasmine_sprout) | 4.19 kernel with Android 16 support (first 23.2 test build) |
 | [android_kernel_xiaomi_jasmine_sprout](https://github.com/iamimmanuelraj/android_kernel_xiaomi_jasmine_sprout) | Earlier kernel used by my older ROMs |
 

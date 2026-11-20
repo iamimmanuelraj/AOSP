@@ -6,13 +6,13 @@
 
 - **Device Tree:** [Device Source Codes Device tree - Mi A2](https://github.com/PixelExperience-Devices/device_xiaomi_jasmine_sprout)
 - **Kernel Tree:** [Device Source Codes Kernel tree - Mi A2](https://github.com/PixelExperience-Devices/kernel_xiaomi_jasmine_sprout)
-- **Vendor Tree:** [Device Source Codes Vendor tree - Mi A2](https://gitlab.pixelexperience.org/android/vendor-blobs/vendor_xiaomi_jasmine_sprout)
+- **Vendor Tree:** [Device Source Codes Vendor tree - Mi A2](https://github.com/PixelExperienceArchive/vendor_xiaomi_jasmine_sprout)
 
 **[PixelExperience ROM Changelogs](CHANGELOG.md)**
 
 **Official Builds:**
 
-- [PixelExperience OFFICIAL - MI A2](https://download.pixelexperience.org/jasmine_sprout)
+- [PixelExperience OFFICIAL - MI A2](https://get.pixelexperience.org/jasmine_sprout)
 
 **Unofficial Builds:**
 

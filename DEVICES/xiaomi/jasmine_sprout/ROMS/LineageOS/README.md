@@ -14,7 +14,7 @@
 
 ## Device Source Codes - Mi A2
 
-- **Kernel Tree:** [Kernel tree - Mi A2 (LineageOS SDM660 4.19, branch lineage-a16)](https://github.com/iamimmanuelraj/android_kernel_xiaomi_sdm660/tree/lineage-a16)
+- **Kernel Tree:** [Kernel tree - Mi A2 (LineageOS SDM660 4.19, branch lineage-23.2)](https://github.com/iamimmanuelraj/android_kernel_xiaomi_sdm660/tree/lineage-23.2)
 
 ## Support
 
