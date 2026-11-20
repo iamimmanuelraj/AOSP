@@ -112,10 +112,10 @@ function deviceCard(ctx, d, h = 3) {
   const { BASE, fmtDate } = ctx;
   const l = d.latest;
   return `<a class="card device-card" href="${BASE}${d.route}">
-    <div class="card-top"><span class="mono tag">${esc(d.codename)}</span>${l ? '<span class="chip chip-ok">Active</span>' : '<span class="chip">Archive</span>'}</div>
+    <div class="card-top"><span class="mono tag">${esc(d.codename)}</span>${l ? '<span class="chip chip-ok">Builds on this site</span>' : '<span class="chip">Past builds only</span>'}</div>
     <h${h}>${esc(d.name)}</h${h}>
     <p class="muted">${esc(d.summary)}</p>
-    ${l ? `<div class="kvs">${label('Latest', romLabel(l))}${label('Android', androidOf(l.title))}${label('Date', fmtDate(l.date))}</div>` : ''}
+    ${l ? `<div class="kvs">${label('Latest release', romLabel(l))}${label('Android', androidOf(l.title))}${label('Build date', fmtDate(l.date))}</div>` : ''}
     <span class="more">Open device <span aria-hidden="true">→</span></span>
   </a>`;
 }
@@ -169,26 +169,31 @@ export const page = {
 <section class="hero">
   <div class="shell hero-grid">
     <div class="hero-copy">
-      <span class="badge">Custom ROMs · kernels · recoveries</span>
+      <span class="badge">Custom ROMs · Kernels · Recoveries</span>
       <h1>Keep your phone <span class="accent">fast, current and yours.</span></h1>
       <p class="lead">Signed Android builds with clear release notes, honest known issues and step-by-step install guides. Free, unofficial and made with care.</p>
       <div class="actions">
-        ${latest ? `<a class="btn btn-accent" href="${BASE}${latest.route}${downloadsAnchor.get(latest.route) ? `#${downloadsAnchor.get(latest.route)}` : ''}">Download ${esc(romLabel(latest))}</a>` : ''}
-        <a class="btn btn-ghost" href="${BASE}devices/">Browse devices</a>
+        <a class="btn btn-accent" href="${BASE}devices/">Browse devices</a>
+        <a class="btn btn-ghost" href="${BASE}install/">How to install</a>
       </div>
     </div>
-    ${latest ? `<aside class="hero-card" aria-label="Latest build">
-      <span class="eyebrow">Latest build</span>
-      <h2>${esc(romLabel(latest))}</h2>
-      <p class="muted">for ${esc(latest.device.name)}</p>
+    ${latest ? `<aside class="hero-card" aria-labelledby="hero-latest">
+      <span class="eyebrow">Latest release</span>
+      <h2 id="hero-latest">${esc(romLabel(latest))} <span class="hc-for">for ${esc(latest.device.name)} <span class="mono tag">${esc(latest.device.codename)}</span></span></h2>
       <dl class="facts">
         <div><dt>Android</dt><dd>${esc(androidOf(latest.title) || '-')}</dd></div>
-        <div><dt>Build date</dt><dd>${fmtDate(latest.date)}</dd></div>
-        <div><dt>Devices</dt><dd>${devices.length}</dd></div>
-        <div><dt>Releases</dt><dd>${allReleases.length}</dd></div>
+        <div><dt>Build date</dt><dd><time datetime="${ctx.isoDate(latest.date)}">${fmtDate(latest.date)}</time></dd></div>
+        ${latest.variants.length ? `<div class="wide"><dt>Variants</dt><dd>${latest.variants.map(esc).join(' · ')}</dd></div>` : ''}
+        ${latest.summary ? `<div class="wide"><dt>What is new</dt><dd class="hc-note">${esc(latest.summary)}</dd></div>` : ''}
       </dl>
-      <a class="btn btn-ghost btn-block" href="${BASE}${latest.route}">Release notes <span aria-hidden="true">→</span></a>
+      <div class="actions">
+        <a class="btn btn-accent" href="${BASE}${latest.route}${latest.hasDownloads ? '#downloads' : ''}">Download<span class="sr-only"> ${esc(romLabel(latest))} for ${esc(latest.device.name)}</span></a>
+        <a class="btn btn-ghost" href="${BASE}${latest.route}">Release notes<span class="sr-only"> for ${esc(romLabel(latest))}, ${esc(latest.device.name)}</span></a>
+      </div>
     </aside>` : ''}
+  </div>
+  <div class="shell">
+    <p class="site-stats"><span class="eyebrow">Whole site</span><span><b>${devices.length}</b> ${devices.length === 1 ? 'device' : 'devices'}</span><span><b>${allReleases.length}</b> ${allReleases.length === 1 ? 'release' : 'releases'} published</span></p>
   </div>
 </section>
 <section class="section">

@@ -106,7 +106,13 @@ for (const readme of mdFiles.filter((f) => /^DEVICES\/[^/]+\/[^/]+\/README\.md$/
           const fm = frontMatter(read(f));
           const banner = fs.existsSync(path.join(verDir, date, 'banner.png')) ? `${routeOf(f)}banner.png` : null;
           const tag = (fm.body.match(/releases\/(?:tag|download)\/([^/)\s]+)/) || [])[1] || null;
-          releases.push({ os, version: ver, date, file: f, route: routeOf(f), title: firstHeading(fm.body), banner, tag, data: fm.data });
+          // facts for the release lists, read from the release's own Markdown: variants named in it, whether it has a Downloads section,
+          // and a one-line summary (the bold lead of its first blockquote, e.g. "Bluetooth and GApps install fix")
+          const variants = ['Vanilla', 'GApps'].filter((v) => new RegExp(`\\b${v}\\b`, 'i').test(fm.body));
+          const lead = (fm.body.match(/^>\s*\*\*(.+?)\*\*/m) || [])[1] || '';
+          const summary = lead.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/^[^\p{L}\p{N}]+/u, '').replace(/[:.\s]+$/, '');
+          const hasDownloads = /^#{2,3}\s+Downloads\s*$/m.test(fm.body);
+          releases.push({ os, version: ver, date, file: f, route: routeOf(f), title: firstHeading(fm.body), banner, tag, data: fm.data, variants, summary, hasDownloads });
         }
       }
       releases.sort((a, b) => b.date.localeCompare(a.date));
