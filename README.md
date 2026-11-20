@@ -36,7 +36,7 @@ DEVICES/<brand>/<codename>/
 
 Downloads are on the [Releases](https://github.com/iamimmanuelraj/AOSP/releases) page, tagged `<os>-<version>-<codename>-<YYYYMMDD>`.
 
-The same Markdown is published as a website at **[immanuelraj.dev/AOSP](https://immanuelraj.dev/AOSP/)**: `site/build.mjs` renders every page from `DEVICES/`, and the [Pages workflow](.github/workflows/pages.yml) rebuilds it on every push. Edit the Markdown; the site follows.
+The same Markdown is published as a website at **[aosp.immanuelraj.dev](https://aosp.immanuelraj.dev/)**: `site/build.mjs` renders every page from `DEVICES/`, and the [Pages workflow](.github/workflows/pages.yml) rebuilds it on every push. Edit the Markdown; the site follows.
 
 ## Mods
 
