@@ -200,7 +200,7 @@ write('updates/', page.updates(ctx));
 write('404.html', page.notFound(ctx));
 
 // sitemap for search engines
-const SITE_URL = process.env.SITE_URL || 'https://iamimmanuelraj.github.io/AOSP/';
+const SITE_URL = process.env.SITE_URL || 'https://immanuelraj.dev/AOSP/';
 const routes = ['', 'devices/', 'releases/', 'support/', 'install/', 'updates/', ...mdFiles.map((f) => routeByFile.get(path.resolve(f)))];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...new Set(routes)].map((r) => `  <url><loc>${esc(SITE_URL + r)}</loc></url>`).join('\n')}\n</urlset>\n`);
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}sitemap.xml\n`);
