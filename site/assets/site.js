@@ -92,8 +92,8 @@
   const list = $('[data-filterable]'); const filterStatus = $('[data-filter-status]');
   $$('[data-filter]').forEach((b) => b.addEventListener('click', () => {
     $$('[data-filter]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    $$('[data-device]', list).forEach((li) => { li.hidden = !!b.dataset.filter && li.dataset.device !== b.dataset.filter; });
-    if (filterStatus) { const n = $$('[data-device]', list).filter((li) => !li.hidden).length; filterStatus.textContent = `Showing ${n} ${n === 1 ? 'release' : 'releases'}${b.dataset.filter ? ` for ${b.textContent}` : ''}`; }
+    $$('[data-device]', list).forEach((g) => { g.hidden = !!b.dataset.filter && g.dataset.device !== b.dataset.filter; });
+    if (filterStatus) { const n = $$('[data-release]', list).filter((li) => !li.closest('[hidden]')).length; filterStatus.textContent = `Showing ${n} ${n === 1 ? 'release' : 'releases'}${b.dataset.filter ? ` for ${b.textContent}` : ''}`; }
   }));
 
   // ---- Markdown tables: label cells for the stacked phone layout; keyboard-scrollable wide tables

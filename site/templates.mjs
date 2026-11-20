@@ -120,15 +120,59 @@ function deviceCard(ctx, d, h = 3) {
   </a>`;
 }
 
-function releaseRow(ctx, r, showDevice = true) {
+const lineOf = (r) => romLabel(r);
+const dlHref = (BASE, r) => `${BASE}${r.route}${r.hasDownloads ? '#downloads' : ''}`;
+
+// Releases of one device (or one ROM), newest first. The newest overall is a highlighted card with a "Latest" badge, key facts
+// and Download / Release notes buttons; the newest of every other ROM line (e.g. LineageOS 24 next to 23.2) carries a
+// "Latest for <line>" badge; older ones are quiet rows showing only what differs (date, line, one-line note).
+// `lvl` = heading level of the card title; `max` = how many releases at most (home page shows the newest three).
+function releaseList(ctx, d, rels, { lvl = 3, max = Infinity } = {}) {
   const { BASE, fmtDate, isoDate } = ctx;
-  return `<li class="release-row">
-    <a href="${BASE}${r.route}">
+  const sorted = [...rels].sort((a, b) => b.date.localeCompare(a.date));
+  if (!sorted.length) return '';
+  const [main, ...rest] = sorted;
+  const lineLatest = new Map();
+  for (const r of sorted) if (!lineLatest.has(lineOf(r))) lineLatest.set(lineOf(r), r);
+  const android = androidOf(main.title);
+  const card = `<li class="rel rel-latest" data-release>
+    <div class="rel-info">
+      <p class="rel-top"><span class="rel-badge">Latest</span><time class="mono" datetime="${isoDate(main.date)}">${fmtDate(main.date)}</time></p>
+      <h${lvl} class="rel-title">${esc(lineOf(main))}${android ? ` <span class="muted">· Android ${esc(android)}</span>` : ''}</h${lvl}>
+      ${main.variants.length ? `<p class="rel-meta">${main.variants.map(esc).join(' · ')}</p>` : ''}
+      ${main.summary ? `<p class="rel-note">${esc(main.summary)}</p>` : ''}
+    </div>
+    <div class="actions">
+      <a class="btn btn-accent btn-sm" href="${dlHref(BASE, main)}">Download<span class="sr-only"> ${esc(lineOf(main))} for ${esc(d.name)}, ${fmtDate(main.date)}</span></a>
+      <a class="btn btn-ghost btn-sm" href="${BASE}${main.route}">Release notes<span class="sr-only"> for ${esc(lineOf(main))}, ${fmtDate(main.date)}</span></a>
+    </div>
+  </li>`;
+  const shown = rest.slice(0, Math.max(0, max - 1));
+  const rows = shown.map((r) => {
+    const isLineLatest = lineLatest.get(lineOf(r)) === r;
+    const showLine = lineOf(r) !== lineOf(main);
+    return `<li class="rel rel-old" data-release><a href="${BASE}${r.route}">
       <time class="mono" datetime="${isoDate(r.date)}">${fmtDate(r.date)}</time>
-      <span class="rr-title">${esc(romLabel(r))}${androidOf(r.title) ? ` <span class="muted">· Android ${esc(androidOf(r.title))}</span>` : ''}</span>
-      ${showDevice ? `<span class="mono tag">${esc(r.device.codename)}</span>` : ''}
+      <span class="rel-what">${showLine ? `<span class="rel-line">${esc(lineOf(r))}</span>` : `<span class="sr-only">${esc(lineOf(r))}</span>`}${isLineLatest ? `<span class="rel-badge rel-badge-sm">Latest for ${esc(lineOf(r))}</span>` : ''}${r.summary ? `<span class="rel-note">${esc(r.summary)}</span>` : ''}</span>
       <span aria-hidden="true" class="arrow">→</span>
     </a></li>`;
+  }).join('');
+  return `<ul class="rel-list">${card}${rows ? `</ul><ul class="rel-list rel-older" aria-label="Older releases of ${esc(d.name)}">${rows}` : ''}</ul>`;
+}
+
+// One group per device that has releases: device name + codename as the header, then its release list.
+function deviceGroups(ctx, { lvl = 3, max = Infinity, allLink = false } = {}) {
+  const { BASE, devices } = ctx;
+  return devices.map((d) => {
+    const rels = d.roms.flatMap((r) => r.releases);
+    if (!rels.length) return '';
+    const id = `grp-${d.codename}`;
+    return `<section class="dev-group" aria-labelledby="${id}" data-device="${esc(d.codename)}">
+    <div class="dev-head"><h${lvl} id="${id}">${esc(d.name)}</h${lvl}><span class="mono tag">${esc(d.codename)}</span></div>
+    ${releaseList(ctx, d, rels, { lvl: lvl + 1, max })}
+    ${allLink ? `<p class="dev-all"><a href="${BASE}${d.route}#releases">All releases for ${esc(d.name)} <span aria-hidden="true">→</span></a></p>` : ''}
+  </section>`;
+  }).join('');
 }
 
 // Breadcrumbs: ancestors are links, the current page is the last item (plain text, aria-current="page").
@@ -216,10 +260,10 @@ export const page = {
   <div class="shell split">
     <div>
       <div class="section-head"><span class="eyebrow">Releases</span><h2>Latest builds</h2></div>
-      <p class="muted">Newest first. Each release page has the notes, checksums and install steps.</p>
+      <p class="muted">Grouped by device, newest first. The release marked Latest is the newest build for that device; each release page has the notes, checksums and install steps.</p>
       <p><a class="btn btn-ghost" href="${BASE}releases/">All releases</a></p>
     </div>
-    <ul class="release-list">${allReleases.slice(0, 6).map((r) => releaseRow(ctx, r)).join('')}</ul>
+    <div class="dev-groups">${deviceGroups(ctx, { lvl: 3, max: 3, allLink: true })}</div>
   </div>
 </section>
 <section class="section-band">
@@ -243,27 +287,21 @@ ${hero(ctx, [['Home', ''], ['Releases', 'releases/']], '<h1>Releases</h1><p clas
 <section class="section tight"><div class="shell narrow">
   <div class="filters" role="group" aria-label="Filter by device"><button class="chip-btn" aria-pressed="true" data-filter="">All</button>${ctx.devices.filter((d) => d.latest).map((d) => `<button class="chip-btn" aria-pressed="false" data-filter="${esc(d.codename)}">${esc(d.name)}</button>`).join('')}</div>
   <p class="sr-only" role="status" aria-live="polite" data-filter-status></p>
-  <ul class="release-list" data-filterable>${ctx.allReleases.map((r) => releaseRow(ctx, r).replace('<li class="release-row">', `<li class="release-row" data-device="${esc(r.device.codename)}">`)).join('')}</ul>
+  <div class="dev-groups" data-filterable>${deviceGroups(ctx, { lvl: 2 })}</div>
 </div></section>` });
   },
 
   device(ctx) {
     const { BASE, device: d, html, source, fmtDate } = ctx;
-    const l = d.latest;
     const ours = d.roms.filter((r) => r.releases.length);
     return layout(ctx, { title: d.name, description: `${d.name} (${d.codename}): ${d.summary}`, route: d.route, body: `
 ${hero(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route]], `
   <span class="mono tag">${esc(d.codename)}</span>
   <h1>${esc(d.name)}</h1><p class="lead">${esc(d.summary)}</p>
-  ${d.guides.length ? `<div class="guides"><span class="k">Guides</span><div class="actions">${d.guides.map((g) => `<a class="btn btn-ghost btn-sm" href="${BASE}${g.route}">${esc(g.title)}</a>`).join('')}</div></div>` : ''}
-  ${l ? `<div class="latest card">
-    <div><span class="eyebrow">Latest build</span><h2>${esc(romLabel(l))}</h2>
-    <div class="kvs">${label('Android', androidOf(l.title))}${label('Date', fmtDate(l.date))}${label('Release', l.tag)}</div></div>
-    <div class="actions"><a class="btn btn-accent" href="${BASE}${l.route}">Release notes & download</a></div>
-  </div>` : ''}`)}
+  ${d.guides.length ? `<div class="guides"><span class="k">Guides</span><div class="actions">${d.guides.map((g) => `<a class="btn btn-ghost btn-sm" href="${BASE}${g.route}">${esc(g.title)}</a>`).join('')}</div></div>` : ''}`)}
 ${ours.length ? `<section class="section tight"><div class="shell narrow">
-  <div class="section-head"><span class="eyebrow">My builds</span><h2>Releases for ${esc(d.name)}</h2></div>
-  <ul class="release-list">${ours.flatMap((r) => r.releases).sort((a, b) => b.date.localeCompare(a.date)).map((r) => releaseRow(ctx, { ...r, device: d }, false)).join('')}</ul>
+  <div class="section-head"><span class="eyebrow">My builds</span><h2 id="releases">Releases for ${esc(d.name)}</h2></div>
+  ${releaseList(ctx, d, ours.flatMap((r) => r.releases), { lvl: 3 })}
 </div></section>` : ''}
 <section class="section tight"><div class="shell narrow">${article(ctx, html.replace(/^\s*<p>[\s\S]*?<\/p>\n?/, ''), source)}</div></section>` });
   },
@@ -272,7 +310,7 @@ ${ours.length ? `<section class="section tight"><div class="shell narrow">
     const { device: d, rom, html, source, title } = ctx;
     return layout(ctx, { title: `${title}`, route: rom.route, body: `
 ${hero(ctx, [['Home', ''], ['Devices', 'devices/'], [d.name, d.route], [rom.os, rom.route]], `<span class="mono tag">${esc(d.codename)}</span><h1>${esc(title)}</h1>`)}
-${rom.releases.length ? `<section class="section tight"><div class="shell narrow"><ul class="release-list">${rom.releases.map((r) => releaseRow(ctx, { ...r, device: d }, false)).join('')}</ul></div></section>` : ''}
+${rom.releases.length ? `<section class="section tight"><div class="shell narrow">${releaseList(ctx, d, rom.releases, { lvl: 2 })}</div></section>` : ''}
 <section class="section tight"><div class="shell narrow">${article(ctx, html, source)}</div></section>` });
   },
 
